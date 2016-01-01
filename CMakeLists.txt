@@ -1,6 +1,6 @@
 project(mirasol)
 cmake_minimum_required(VERSION 2.8.11)
-add_executable(mirasol mirasol.cpp mwidget.cpp dotcanvas.cpp)
+add_executable(mirasol mirasol.cpp mwidget.cpp dotcanvas.cpp xy.cpp angle.cpp)
 #target_link_libraries(mirasol Qt4::QtGui)
 target_link_libraries(mirasol Qt5::Widgets)
 
