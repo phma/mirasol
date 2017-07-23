@@ -1,9 +1,12 @@
+#ifndef DOTCANVAS_H
+#define DOTCANVAS_H
 #include <QtWidgets>
 #include <vector>
 #include "xy.h"
 
 class DotCanvas: public QWidget
 {
+  Q_OBJECT
 public:
   DotCanvas(QWidget *parent=0);
   void setPen(const QPen &qpen);
@@ -16,3 +19,4 @@ private:
   QBrush brush;
   std::vector<xy> dots;
 };
+#endif

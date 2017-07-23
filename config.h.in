@@ -1,6 +1,6 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 #cmakedefine BIGENDIAN
-#define VERSION "@23ZIP_VERSION@"
+#define VERSION "@MIRASOL_VERSION@"
 #endif
 

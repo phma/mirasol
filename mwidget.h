@@ -3,6 +3,7 @@
 
 class MirasolWidget: public QWidget
 {
+  Q_OBJECT
 public:
   QLineEdit *inpline;
   QPushButton *button;

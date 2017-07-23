@@ -1,9 +1,5 @@
 project(mirasol)
-cmake_minimum_required(VERSION 2.8.11)
-add_executable(mirasol mirasol.cpp mwidget.cpp dotcanvas.cpp xy.cpp angle.cpp trajectory.cpp)
-add_executable(miratest miratest.cpp xy.cpp angle.cpp trajectory.cpp)
-#target_link_libraries(mirasol Qt4::QtGui)
-target_link_libraries(mirasol Qt5::Widgets)
+cmake_minimum_required(VERSION 3.1.0)
 
 include(TestBigEndian)
 include(CheckTypeSize)
@@ -11,8 +7,12 @@ include(CheckTypeSize)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 
-#find_package(Qt4)
 find_package(Qt5Widgets)
+
+add_executable(mirasol mirasol.cpp mwidget.cpp dotcanvas.cpp xy.cpp angle.cpp trajectory.cpp)
+add_executable(miratest miratest.cpp xy.cpp angle.cpp trajectory.cpp)
+#target_link_libraries(mirasol Qt4::QtGui)
+target_link_libraries(mirasol Qt5::Widgets)
 
 set(CMAKE_CXX_FLAGS "-std=c++11")
 install(TARGETS mirasol DESTINATION bin)
