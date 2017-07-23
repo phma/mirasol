@@ -11,6 +11,7 @@ public:
   double length() const;
   bool isfinite() const;
   bool isnan() const;
+  xy conj() const;
   void _roscat(xy tfrom,int ro,double sca,xy cis,xy tto);
   virtual void roscat(xy tfrom,int ro,double sca,xy tto); // rotate, scale, translate
   friend xy operator+(const xy &l,const xy &r);

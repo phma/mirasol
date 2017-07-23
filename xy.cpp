@@ -38,6 +38,11 @@ bool xy::isnan() const
   return std::isnan(x) || std::isnan(y);
 }
 
+xy xy::conj() const
+{
+  return xy(x,-y);
+}
+
 void xy::_roscat(xy tfrom,int ro,double sca,xy cis,xy tto)
 {
   double tx,ty;

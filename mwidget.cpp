@@ -4,6 +4,8 @@ using namespace std;
 
 MirasolWidget::MirasolWidget(QWidget *parent):QWidget(parent)
 {
+  vector<xy> dots;
+  int i,j;
   resize(320,240);
   setWindowTitle(QApplication::translate("main", "Mirasol"));
   show();
@@ -14,6 +16,10 @@ MirasolWidget::MirasolWidget(QWidget *parent):QWidget(parent)
   button->move(216,0);
   button->show();
   dotcanvas=new DotCanvas(this);
+  for (i=-1;i<2;i++)
+    for (j=-1;j<2;j++)
+      dots.push_back(xy(i,j));
+  dotcanvas->setDots(dots);
   dotcanvas->move(0,32);
   dotcanvas->show();
   connect(inpline,&QLineEdit::textChanged,this,&MirasolWidget::setnumber);
