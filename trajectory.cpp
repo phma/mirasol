@@ -1,4 +1,9 @@
 #include "trajectory.h"
+#include <map>
+#include <set>
+#include "angle.h"
+
+using namespace std;
 
 double minquad(double x0,double y0,double x1,double y1,double x2,double y2)
 /* Finds the minimum (or maximum) of a quadratic, given three points on it.
@@ -44,7 +49,55 @@ double Trajectory::closest()
  * are closest to each other, do this to their difference.
  */
 {
-  //tba
+  int nstartpoints,i,angerr,angtoler,endangle;
+  double closest,closedist,lastclosedist,fardist,len2,vertex;
+  map<double,double> stdist;
+  set<double> inserenda,delenda;
+  set<double>::iterator j;
+  map<double,double>::iterator k0,k1,k2;
+  nstartpoints=4;
+  closedist=INFINITY;
+  fardist=0;
+  for (i=0;i<=nstartpoints;i++)
+    inserenda.insert((double)i/nstartpoints);
+  do
+  {
+    lastclosedist=closedist;
+    for (j=delenda.begin();j!=delenda.end();++j)
+      stdist.erase(*j);
+    for (j=inserenda.begin();j!=inserenda.end();++j)
+    {
+      len2=sqr(position(*j).length());
+      if (len2<closedist)
+      {
+	closest=*j;
+	closedist=len2;
+	//angerr=((bearing(*j)-atan2i((xy)station(*j)-topoint))&(DEG180-1))-DEG90;
+      }
+      if (len2>fardist)
+	fardist=len2;
+      stdist[*j]=len2;
+    }
+    inserenda.clear();
+    delenda.clear();
+    for (k0=k1=stdist.begin(),k2=++k1,++k2;stdist.size()>2 && k2!=stdist.end();++k0,++k1,++k2)
+    {
+      vertex=minquad(k0->first,k0->second,k1->first,k1->second,k2->first,k2->second);
+      if (vertex<0 && vertex>-0.5)
+	vertex=-vertex;
+      if (vertex>1 && vertex<1.5)
+	vertex=2-vertex;
+      if (stdist.count(vertex) && vertex!=k1->first)
+	delenda.insert(k1->first);
+      if (!stdist.count(vertex) && vertex>=0 && vertex<=1)
+	inserenda.insert(vertex);
+    }
+    if (lastclosedist>closedist)
+      angtoler=1;
+    else
+      angtoler*=7;
+  } while (16777216>=angtoler);
+  return closest;
 }
 
 Trajectory operator+(const Trajectory &l,const Trajectory &r)
