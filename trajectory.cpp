@@ -1,5 +1,19 @@
 #include "trajectory.h"
 
+double minquad(double x0,double y0,double x1,double y1,double x2,double y2)
+/* Finds the minimum (or maximum) of a quadratic, given three points on it.
+ * x1 should be between x0 and x2.
+ * Used to find the closest point on a trajectory to the origin.
+ */
+{
+  double xm,s1,s2;
+  xm=(x0+2*x1+x2)/4;
+  s1=(y1-y0)/(x1-x0);
+  s2=(y2-y1)/(x2-x1);
+  //cout<<"s1="<<s1<<" s2="<<s2<<" xm="<<xm<<endl;
+  return xm+(x2-x0)*(s1+s2)/(s1-s2)/4;
+}
+
 Trajectory::Trajectory()
 {
   start=end=ctrl=xy(0,0);
