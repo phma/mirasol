@@ -62,6 +62,7 @@ void DotCanvas::paintEvent(QPaintEvent *event)
   QPainter painter(this);
   painter.setPen(pen);
   painter.setBrush(brush);
+  painter.setRenderHint(QPainter::Antialiasing,true);
   for (i=0;i<dots.size();i++)
   {
     canvasdot=dots[i].conj()*scale+center; // conj because canvas is y-downward
