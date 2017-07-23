@@ -18,11 +18,17 @@ void Trajectory::push(xy adj)
 }
 
 xy Trajectory::position(double t)
+// Returns the position at time t, which ranges from 0 to 1.
 {
   return t*t*end+2*t*(1-t)*ctrl+(1-t)*(1-t)*start;
 }
 
 double Trajectory::closest()
+/* Returns the time, from 0 to 1, when the trajectory is closest to (0,0).
+ * Since the trajectory is quadratic, this requires minimizing a quartic.
+ * This is done by parabolic interpolation. To find when two trajectories
+ * are closest to each other, do this to their difference.
+ */
 {
   //tba
 }
