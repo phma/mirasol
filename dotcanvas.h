@@ -22,7 +22,8 @@ private:
   QPen pen;
   QBrush brush;
   DotList dots;
-  xy center;
+  xy center; // of widget
+  xy middle; // of rectangle containing dots
   double scale;
   double top,left,bottom,right; // These are 0, not infinity, if dots is empty.
 };

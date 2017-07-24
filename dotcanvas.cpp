@@ -33,6 +33,7 @@ void DotCanvas::setSize()
     scale=xscale;
   else
     scale=yscale;
+  middle=xy(right+left,top+bottom)/2;
   //cout<<"center "<<center<<" scale "<<scale<<endl;
 }
 
@@ -66,7 +67,7 @@ void DotCanvas::paintEvent(QPaintEvent *event)
   painter.setRenderHint(QPainter::Antialiasing,true);
   for (i=0;i<dots.size();i++)
   {
-    canvasdot=dots[i].conj()*scale+center; // conj because canvas is y-downward
+    canvasdot=(dots[i]-middle).conj()*scale+center; // conj because canvas is y-downward
     painter.drawEllipse(QPointF(canvasdot.getx(),canvasdot.gety()),DOTRADIUS*scale,DOTRADIUS*scale);
   }
 }
