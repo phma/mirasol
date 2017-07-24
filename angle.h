@@ -66,6 +66,6 @@ int radtobin(double angle);
 #define DEG120 0x2aaaaaab
 #define DEG180 0x40000000
 #define DEG360 0x80000000
-
+#define PHITURN 0x4f1bbcdd
 
 #endif

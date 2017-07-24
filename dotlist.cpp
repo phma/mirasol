@@ -43,6 +43,12 @@ DotList operator+(const DotList l,const xy r)
   return ret;
 }
 
+DotList operator+=(DotList &l,const xy r)
+{
+  l.list.push_back(r);
+  return l;
+}
+
 DotList operator*(const DotList l,const DotList r)
 // Returns l.size() copies of r arranged in l enlarged by the radius of r.
 {
