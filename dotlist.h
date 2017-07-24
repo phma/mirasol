@@ -1,3 +1,5 @@
+#ifndef DOTLIST_H
+#define DOTLIST_H
 #include <vector>
 #include "xy.h"
 
@@ -15,3 +17,4 @@ public:
 private:
   std::vector<xy> list;
 };
+#endif

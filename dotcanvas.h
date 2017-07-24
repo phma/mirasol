@@ -3,6 +3,7 @@
 #include <QtWidgets>
 #include <vector>
 #include "xy.h"
+#include "dotlist.h"
 
 class DotCanvas: public QWidget
 {
@@ -11,7 +12,7 @@ public:
   DotCanvas(QWidget *parent=0);
   void setPen(const QPen &qpen);
   void setBrush(const QBrush &qbrush);
-  void setDots(std::vector<xy> newDots);
+  void setDots(DotList newDots);
   void setSize();
 public slots:
 protected:
@@ -20,7 +21,7 @@ protected:
 private:
   QPen pen;
   QBrush brush;
-  std::vector<xy> dots;
+  DotList dots;
   xy center;
   double scale;
   double top,left,bottom,right; // These are 0, not infinity, if dots is empty.

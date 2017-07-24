@@ -1,10 +1,11 @@
 #include <iostream>
 #include "mwidget.h"
+#include "pattern.h"
 using namespace std;
 
 MirasolWidget::MirasolWidget(QWidget *parent):QWidget(parent)
 {
-  vector<xy> dots;
+  DotList dots;
   int i,j;
   resize(320,240);
   setWindowTitle(QApplication::translate("main", "Mirasol"));
@@ -18,7 +19,7 @@ MirasolWidget::MirasolWidget(QWidget *parent):QWidget(parent)
   dotcanvas=new DotCanvas(this);
   for (i=-1;i<2;i++)
     for (j=-1;j<2;j++)
-      dots.push_back(xy(i,j));
+      dots+=xy(i,j);
   dotcanvas->setDots(dots);
   dotcanvas->move(0,32);
   dotcanvas->show();
@@ -28,4 +29,5 @@ MirasolWidget::MirasolWidget(QWidget *parent):QWidget(parent)
 void MirasolWidget::setnumber(const QString &newtext)
 {
   cout<<newtext.toStdString()<<endl;
+  dotcanvas->setDots(aster(newtext.toInt()));
 }

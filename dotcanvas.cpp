@@ -36,7 +36,7 @@ void DotCanvas::setSize()
   //cout<<"center "<<center<<" scale "<<scale<<endl;
 }
 
-void DotCanvas::setDots(vector<xy> newDots)
+void DotCanvas::setDots(DotList newDots)
 {
   dots=newDots;
   int i;
@@ -53,6 +53,7 @@ void DotCanvas::setDots(vector<xy> newDots)
       right=dots[i].getx();
   }
   setSize();
+  update();
 }
 
 void DotCanvas::paintEvent(QPaintEvent *event)
