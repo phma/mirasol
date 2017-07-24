@@ -1,5 +1,6 @@
 #include "pattern.h"
 #include "angle.h"
+#define ASTERSCALE 0.64681617664289504
 
 DotList aster(int n)
 /* Returns an asteraceous pattern. Pattern invented by H. Vogel in 1979
@@ -13,7 +14,7 @@ DotList aster(int n)
   for (i=0;i<n;i++)
   {
     asterAngle+=PHITURN;
-    ret+=cossin(asterAngle)*sqrt(i+0.5);
+    ret+=cossin(asterAngle)*sqrt(i+0.5)*ASTERSCALE;
   }
   return ret;
 }
