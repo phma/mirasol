@@ -1,7 +1,7 @@
 #include <QtWidgets>
 #include "dotcanvas.h"
 
-class MirasolWidget: public QWidget
+class MirasolWidget: public QMainWindow
 {
   Q_OBJECT
 public:

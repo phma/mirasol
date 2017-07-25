@@ -3,7 +3,7 @@
 #include "pattern.h"
 using namespace std;
 
-MirasolWidget::MirasolWidget(QWidget *parent):QWidget(parent)
+MirasolWidget::MirasolWidget(QWidget *parent):QMainWindow(parent)
 {
   DotList dots;
   int i,j;
@@ -12,16 +12,16 @@ MirasolWidget::MirasolWidget(QWidget *parent):QWidget(parent)
   show();
   inpline=new QLineEdit(this);
   inpline->setBackgroundRole(QPalette::Base);
-  inpline->show();
+  //inpline->show();
   button = new QPushButton(QApplication::translate("main", "Show number"),this);
   button->move(216,0);
-  button->show();
+  //button->show();
   dotcanvas=new DotCanvas(this);
   for (i=-1;i<2;i++)
     for (j=-1;j<2;j++)
       dots+=xy(i,j);
   dotcanvas->setDots(dots);
-  dotcanvas->move(0,32);
+  setCentralWidget(dotcanvas);
   dotcanvas->show();
   connect(inpline,&QLineEdit::textChanged,this,&MirasolWidget::setnumber);
 }
