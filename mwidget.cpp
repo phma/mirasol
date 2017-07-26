@@ -20,14 +20,20 @@ MirasolWidget::MirasolWidget(QWidget *parent):QMainWindow(parent)
   for (i=-1;i<2;i++)
     for (j=-1;j<2;j++)
       dots+=xy(i,j);
-  dotcanvas->setDots(dots);
+  //dotcanvas->setDots(dots);
+  setnumber(64);
   setCentralWidget(dotcanvas);
   dotcanvas->show();
-  connect(inpline,&QLineEdit::textChanged,this,&MirasolWidget::setnumber);
+  connect(inpline,SIGNAL(textChanged(QString)),this,SLOT(setnumber(QString)));
+}
+
+void MirasolWidget::setnumber(int num)
+{
+  cout<<num<<endl;
+  dotcanvas->setDots(basePattern(num,10));
 }
 
 void MirasolWidget::setnumber(const QString &newtext)
 {
-  cout<<newtext.toStdString()<<endl;
-  dotcanvas->setDots(aster(newtext.toInt()));
+  setnumber(newtext.toInt());
 }

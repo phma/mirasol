@@ -1,3 +1,4 @@
 #include "dotlist.h"
 
-DotList aster(int n);
+DotList asterPattern(int n);
+DotList basePattern(int n,int base);

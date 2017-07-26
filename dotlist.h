@@ -10,6 +10,7 @@ public:
   DotList(xy dot);
   xy operator[](int n);
   int size() const;
+  void resize(unsigned int n);
   friend DotList operator+(const DotList l,const DotList r);
   friend DotList operator+(const DotList l,const xy r);
   friend DotList operator+=(DotList &l,const xy r);

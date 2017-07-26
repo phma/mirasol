@@ -22,6 +22,14 @@ int DotList::size() const
   return list.size();
 }
 
+void DotList::resize(unsigned int n)
+/* Don't resize to bigger than current size. It'll add a lot of dots (0,0),
+ * which will all look like one dot.
+ */
+{
+  list.resize(n);
+}
+
 /* Addition of dotlists is commutative as far as the set of dots goes,
  * but not their order. Multiplication of dotlists is commutative as far
  * as the number of dots goes, but not the set.
@@ -61,9 +69,9 @@ DotList operator*(const DotList l,const DotList r)
   for (scale=j=0;j<rsz;j++)
     if (r.list[j].length()>scale)
       scale=r.list[j].length();
-  scale+=0.5; // add the radius of a dot
+  scale=2*scale+1; // add the radius of a dot, and double so that they don't overlap
   for (i=0;i<lsz;i++)
     for (j=0;j<rsz;j++)
-      ret.list[i*rsz+j]=l.list[i]*scale+r.list[i];
+      ret.list[i*rsz+j]=l.list[i]*scale+r.list[j];
   return ret;
 }

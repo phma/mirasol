@@ -10,5 +10,8 @@ public:
   DotCanvas *dotcanvas;
   MirasolWidget(QWidget *parent=0);
 public slots:
+  void setnumber(int num);
   void setnumber(const QString &newtext);
+private:
+  int numDots;
 };

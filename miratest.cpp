@@ -21,7 +21,7 @@ void testAster()
   int i,j;
   double distance=INFINITY;
   DotList a;
-  a=aster(1000);
+  a=asterPattern(1000);
   for (i=0;i<a.size();i++)
     for (j=0;j<i;j++)
       if (dist(a[i],a[j])<distance)
