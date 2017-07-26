@@ -1,5 +1,7 @@
 #include "pattern.h"
+#include <set>
 #include "angle.h"
+#include "random.h"
 #define ASTERSCALE 0.64681617664289504
 using namespace std;
 
@@ -58,4 +60,27 @@ DotList basePattern(int n,int base)
   return ret;
 }
 
-    
+DotList compositePattern(int n)
+{
+  set<int> factors;
+  vector<int> properFactors,twoFactors;
+  set<int>::iterator j;
+  int i;
+  for (i=1;i*i<=n;i++)
+    if (n%i==0)
+    {
+      factors.insert(i);
+      factors.insert(n/i);
+    }
+  for (j=factors.begin();j!=factors.end();++j)
+    if (*j>1 && *j<n)
+      properFactors.push_back(*j);
+  if (properFactors.size())
+  {
+    twoFactors.push_back(properFactors[rng.uirandom()%properFactors.size()]);
+    twoFactors.push_back(n/twoFactors[0]);
+  }
+  else
+    twoFactors.push_back(n);
+  return productPattern(twoFactors);
+}
