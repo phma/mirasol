@@ -3,6 +3,7 @@
 #include "angle.h"
 #include "random.h"
 #define ASTERSCALE 0.64681617664289504
+#define FIBOSCALE 1.72014502785246199494
 using namespace std;
 
 DotList asterPattern(int n)
@@ -83,4 +84,35 @@ DotList compositePattern(int n)
   else
     twoFactors.push_back(n);
   return productPattern(twoFactors);
+}
+
+DotList fibonacciPattern(int n,xy a,xy c,bool side)
+/* The altitude of a Kepler triangle divides the triangle's area in the
+ * golden ratio. This function splits n in the golden ratio, splits
+ * the triangle in the golden ratio, and recurses, producing a pattern
+ * of dots along a space-filling fractal in the Kepler triangle.
+ */
+{
+  xy b,alt;
+  DotList ret;
+  int bigPart,littlePart;
+  alt=turn90(c-a)*M_SQRTCUBE_1PHI;
+  if (side)
+    alt=-alt;
+  b=(c+M_1PHI*a)*M_1PHI+alt;
+  if (n>1)
+  {
+    bigPart=rint(n*M_1PHI);
+    littlePart=n-bigPart;
+    ret=fibonacciPattern(bigPart,a,b,!side)+fibonacciPattern(littlePart,b,c,!side);
+  }
+  else if (n==1)
+    ret+=(a*15+b*24+c*20)/59;
+  return ret;
+}
+
+DotList fibonacciPattern(int n)
+{
+  xy a(sqrt(n)*M_1PHI*FIBOSCALE,-sqrt(n)*M_SQRTCUBE_1PHI*FIBOSCALE);
+  return fibonacciPattern(n,a,-a,false);
 }

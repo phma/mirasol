@@ -21,7 +21,7 @@ MirasolWidget::MirasolWidget(QWidget *parent):QMainWindow(parent)
     for (j=-1;j<2;j++)
       dots+=xy(i,j);
   //dotcanvas->setDots(dots);
-  setnumber(720);
+  setnumber(987);
   setCentralWidget(dotcanvas);
   dotcanvas->show();
   connect(inpline,SIGNAL(textChanged(QString)),this,SLOT(setnumber(QString)));
@@ -30,7 +30,7 @@ MirasolWidget::MirasolWidget(QWidget *parent):QMainWindow(parent)
 void MirasolWidget::setnumber(int num)
 {
   cout<<num<<endl;
-  dotcanvas->setDots(compositePattern(num));
+  dotcanvas->setDots(fibonacciPattern(num));
 }
 
 void MirasolWidget::setnumber(const QString &newtext)

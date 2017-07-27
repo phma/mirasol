@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 #include <cassert>
 #include <cmath>
 #include "trajectory.h"
@@ -16,17 +17,34 @@ void testTrajectory()
   assert(p0==xy(19.75,11.75));
 }
 
-void testAster()
+double shortestDistance(DotList a)
 {
   int i,j;
   double distance=INFINITY;
-  DotList a;
-  a=asterPattern(1000);
   for (i=0;i<a.size();i++)
     for (j=0;j<i;j++)
       if (dist(a[i],a[j])<distance)
         distance=dist(a[i],a[j]);
-  cout<<"Shortest distance "<<distance<<endl;
+  return distance;
+}
+
+void testAster()
+{
+  DotList a;
+  double distance;
+  a=asterPattern(1000);
+  distance=shortestDistance(a);
+  cout<<"Shortest distance aster "<<distance<<endl;
+  assert(fabs(distance-1)<1e-12);
+}
+
+void testFibonacci()
+{
+  DotList a;
+  double distance;
+  a=fibonacciPattern(987);
+  distance=shortestDistance(a);
+  cout<<"Shortest distance fibo "<<distance<<endl;
   assert(fabs(distance-1)<1e-12);
 }
 
@@ -34,5 +52,6 @@ int main(int argc, char *argv[])
 {
   testTrajectory();
   testAster();
+  testFibonacci();
   return 0;
 }
