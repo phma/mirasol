@@ -116,3 +116,23 @@ DotList fibonacciPattern(int n)
   xy a(sqrt(n)*M_1PHI*FIBOSCALE,-sqrt(n)*M_SQRTCUBE_1PHI*FIBOSCALE);
   return fibonacciPattern(n,a,-a,false);
 }
+
+DotList squarePronicPattern(int n)
+/* This is used for both square and pronic numbers. It finds the factor
+ * closest to the square root, then draws a rectangle with that many dots
+ * on the short side. If given a prime like 8191, it produces a long,
+ * thin red line.
+ */
+{
+  int i,j,littleDiv,bigDiv;
+  DotList ret;
+  for (littleDiv=floor(sqrt(n));n%littleDiv;--littleDiv);
+  if (littleDiv)
+    bigDiv=n/littleDiv;
+  else
+    bigDiv=1; // doesn't matter, 0 is both square and pronic
+  for (i=0;i<littleDiv;i++)
+    for (j=0;j<bigDiv;j++)
+      ret+=xy((2*j+1-bigDiv)/2.,(2*i+1-littleDiv)/2.);
+  return ret;
+}
