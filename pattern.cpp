@@ -136,3 +136,15 @@ DotList squarePronicPattern(int n)
       ret+=xy((2*j+1-bigDiv)/2.,(2*i+1-littleDiv)/2.);
   return ret;
 }
+
+DotList trianglePattern(int n)
+{
+  int i,j;
+  double startY;
+  DotList ret;
+  startY=(sqrt(8*n+1)-3)/2*M_SQRT_1_3;
+  for (i=0;(i)*(i+1)/2<=n;i++)
+    for (j=0;j<=i && (i)*(i+1)/2+j<n;j++)
+      ret+=xy(j-i/2.,startY-i*M_SQRT_3_4);
+  return ret;
+}
