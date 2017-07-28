@@ -11,3 +11,4 @@ DotList compositePattern(int n);
 DotList fibonacciPattern(int n);
 DotList squarePronicPattern(int n);
 DotList trianglePattern(int n);
+DotList hexagonPattern(int n);

@@ -6,6 +6,9 @@
 #define FIBOSCALE 1.72014502785246199494
 using namespace std;
 
+xy step0(1,0),step60(0.5,M_SQRT_3_4),step120(-0.5,M_SQRT_3_4);
+xy step180(-1,0),step240(-0.5,-M_SQRT_3_4),step300(0.5,-M_SQRT_3_4);
+
 DotList asterPattern(int n)
 /* Returns an asteraceous pattern. Pattern invented by H. Vogel in 1979
  * and later by me, not knowing of Vogel. This program is named Mirasol
@@ -146,5 +149,30 @@ DotList trianglePattern(int n)
   for (i=0;(i)*(i+1)/2<=n;i++)
     for (j=0;j<=i && (i)*(i+1)/2+j<n;j++)
       ret+=xy(j-i/2.,startY-i*M_SQRT_3_4);
+  return ret;
+}
+
+DotList hexagonPattern(int n)
+{
+  int i;
+  xy pos,step(step0);
+  DotList ret;
+  for (i=0;i<n;i++)
+  {
+    ret+=pos;
+    pos+=step;
+    if (pos.getx()>0 && fabs(pos.gety())<0.1)
+      step=step120;
+    if (pos.getx()>0 && fabs(pos.gety()-M_SQRT_3*pos.getx())<0.1)
+      step=step180;
+    if (pos.getx()<0 && fabs(pos.gety()+M_SQRT_3*pos.getx())<0.1)
+      step=step240;
+    if (pos.getx()<0 && fabs(pos.gety())<0.1)
+      step=step300;
+    if (pos.getx()<0 && fabs(pos.gety()-M_SQRT_3*pos.getx())<0.1)
+      step=step0;
+    if (pos.getx()>1 && fabs(pos.gety()+M_SQRT_3*(pos.getx()-1))<0.1)
+      step=step60;
+  }
   return ret;
 }
