@@ -9,7 +9,7 @@ set(CMAKE_AUTOMOC ON)
 
 find_package(Qt5Widgets)
 
-add_executable(mirasol mirasol.cpp mwidget.cpp dotcanvas.cpp xy.cpp angle.cpp trajectory.cpp dotlist.cpp pattern.cpp random.cpp)
+add_executable(mirasol mirasol.cpp mwidget.cpp dotcanvas.cpp xy.cpp angle.cpp trajectory.cpp dotlist.cpp pattern.cpp random.cpp maction.cpp)
 add_executable(miratest miratest.cpp xy.cpp angle.cpp trajectory.cpp dotlist.cpp
 pattern.cpp random.cpp)
 #target_link_libraries(mirasol Qt4::QtGui)
