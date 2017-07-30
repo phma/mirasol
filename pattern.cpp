@@ -176,3 +176,56 @@ DotList hexagonPattern(int n)
   }
   return ret;
 }
+
+bool isComposite(int n)
+{
+  int littleDiv;
+  for (littleDiv=floor(sqrt(n));n%littleDiv;--littleDiv);
+  return littleDiv>1;
+}
+
+bool isPrime(int n)
+{
+  int littleDiv;
+  for (littleDiv=floor(sqrt(n));n%littleDiv;--littleDiv);
+  return littleDiv==1;
+}
+
+bool isFibonacci(int n)
+{
+  int a,b;
+  for (a=0,b=1;a<n;a+=b,b=a-b);
+  return a==n;
+}
+
+bool isSquare(int n)
+{
+  int littleDiv,bigDiv;
+  for (littleDiv=floor(sqrt(n));n%littleDiv;--littleDiv);
+  if (littleDiv)
+    bigDiv=n/littleDiv;
+  else
+    bigDiv=0;
+  return littleDiv==bigDiv;
+}
+
+bool isPronic(int n)
+{
+  int littleDiv,bigDiv;
+  for (littleDiv=floor(sqrt(n));n%littleDiv;--littleDiv);
+  if (littleDiv)
+    bigDiv=n/littleDiv;
+  else
+    bigDiv=1;
+  return littleDiv==bigDiv-1;
+}
+
+bool isTriangle(int n)
+{
+  return isPronic(2*n);
+}
+
+bool isHexagon(int n)
+{
+  return n%6==1 && isPronic(n/3);
+}

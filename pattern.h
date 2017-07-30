@@ -12,3 +12,11 @@ DotList fibonacciPattern(int n);
 DotList squarePronicPattern(int n);
 DotList trianglePattern(int n);
 DotList hexagonPattern(int n);
+
+bool isComposite(int n);
+bool isPrime(int n);
+bool isFibonacci(int n);
+bool isSquare(int n);
+bool isPronic(int n);
+bool isTriangle(int n);
+bool isHexagon(int n);
