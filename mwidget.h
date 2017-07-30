@@ -8,6 +8,7 @@ public:
   QLineEdit *inpline;
   QPushButton *button;
   DotCanvas *dotcanvas;
+  QToolBar *toolbar;
   MirasolWidget(QWidget *parent=0);
 public slots:
   void setnumber(int num);

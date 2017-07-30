@@ -16,6 +16,7 @@ MirasolWidget::MirasolWidget(QWidget *parent):QMainWindow(parent)
   button = new QPushButton(QApplication::translate("main", "Show number"),this);
   button->move(216,0);
   //button->show();
+  toolbar=new QToolBar(this);
   dotcanvas=new DotCanvas(this);
   for (i=-1;i<2;i++)
     for (j=-1;j<2;j++)
@@ -23,6 +24,7 @@ MirasolWidget::MirasolWidget(QWidget *parent):QMainWindow(parent)
   //dotcanvas->setDots(dots);
   setnumber(37);
   setCentralWidget(dotcanvas);
+  addToolBar(Qt::TopToolBarArea,toolbar);
   dotcanvas->show();
   connect(inpline,SIGNAL(textChanged(QString)),this,SLOT(setnumber(QString)));
 }
