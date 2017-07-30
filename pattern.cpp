@@ -251,7 +251,7 @@ DotList kindPattern(int n,int kind)
       return hexagonPattern(n);
       break;
     default:
-      return asterPattern(n);
+      return basePattern(n,kind);
   }
 }
 
