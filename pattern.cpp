@@ -229,3 +229,58 @@ bool isHexagon(int n)
 {
   return n%6==1 && isPronic(n/3);
 }
+
+DotList kindPattern(int n,int kind)
+{
+  switch (kind)
+  {
+    case KIND_COMPOSITE:
+      return compositePattern(n);
+      break;
+    case KIND_FIBONACCI:
+      return fibonacciPattern(n);
+      break;
+    case KIND_SQUARE:
+    case KIND_PRONIC:
+      return squarePronicPattern(n);
+      break;
+    case KIND_TRIANGLE:
+      return trianglePattern(n);
+      break;
+    case KIND_HEXAGON:
+      return hexagonPattern(n);
+      break;
+    default:
+      return asterPattern(n);
+  }
+}
+
+bool isKind(int n,int kind)
+{
+  switch (kind)
+  {
+    case KIND_COMPOSITE:
+      return isComposite(n);
+      break;
+    case KIND_PRIME:
+      return isPrime(n);
+      break;
+    case KIND_FIBONACCI:
+      return isFibonacci(n);
+      break;
+    case KIND_SQUARE:
+      return isSquare(n);
+      break;
+    case KIND_PRONIC:
+      return isPronic(n);
+      break;
+    case KIND_TRIANGLE:
+      return isTriangle(n);
+      break;
+    case KIND_HEXAGON:
+      return isHexagon(n);
+      break;
+    default:
+      return true;
+  }
+}
