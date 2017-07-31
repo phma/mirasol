@@ -15,7 +15,7 @@ MirasolWidget::MirasolWidget(QWidget *parent):QMainWindow(parent)
   for (i=-1;i<2;i++)
     for (j=-1;j<2;j++)
       dots+=xy(i,j);
-  setnumber(37);
+  setnumber(30);
   setCentralWidget(dotcanvas);
   addToolBar(Qt::TopToolBarArea,toolbar);
   dotcanvas->show();
@@ -25,7 +25,7 @@ MirasolWidget::MirasolWidget(QWidget *parent):QMainWindow(parent)
 void MirasolWidget::setnumber(int num)
 {
   cout<<num<<endl;
-  dotcanvas->setDots(hexagonPattern(num));
+  dotcanvas->setDots(smooth5Pattern(num));
 }
 
 void MirasolWidget::setnumber(const QString &newtext)
@@ -43,4 +43,5 @@ void MirasolWidget::setnumber(const QString &newtext)
  * Triangular: 36.
  * Hexagonal: 37.
  * Fibonacci: 34.
+ * 5-Smooth: 30.
  */

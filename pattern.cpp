@@ -177,6 +177,26 @@ DotList hexagonPattern(int n)
   return ret;
 }
 
+DotList smooth5Pattern(int n)
+{
+  int i;
+  DotList ret;
+  vector<int> factors;
+  for (i=2;n>1;i++)
+    if (n%i==0)
+    {
+      factors.push_back(1);
+      while (n%i==0)
+      {
+        factors.back()*=i;
+        n/=i;
+      }
+    }
+  if (n)
+    ret=productPattern(factors);
+  return ret;
+}
+
 bool isComposite(int n)
 {
   int littleDiv;
@@ -230,6 +250,19 @@ bool isHexagon(int n)
   return n%6==1 && isPronic(n/3);
 }
 
+bool isSmooth5(int n)
+{
+  if (n==0)
+    n=7; // 0 is not smooth, as it is divisible by all primes.
+  while ((n%2)==0)
+    n/=2;
+  while ((n%3)==0)
+    n/=3;
+  while ((n%5)==0)
+    n/=5;
+  return n==1;
+}
+
 DotList kindPattern(int n,int kind)
 {
   switch (kind)
@@ -249,6 +282,9 @@ DotList kindPattern(int n,int kind)
       break;
     case KIND_HEXAGON:
       return hexagonPattern(n);
+      break;
+    case KIND_SMOOTH5:
+      return smooth5Pattern(n);
       break;
     default:
       return basePattern(n,kind);
@@ -279,6 +315,9 @@ bool isKind(int n,int kind)
       break;
     case KIND_HEXAGON:
       return isHexagon(n);
+      break;
+    case KIND_SMOOTH5:
+      return isSmooth5(n);
       break;
     default:
       return true;

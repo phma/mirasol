@@ -11,7 +11,8 @@
 #define KIND_PRONIC -5
 #define KIND_TRIANGLE -6
 #define KIND_HEXAGON -7
-#define NUM_KINDS 7
+#define KIND_SMOOTH5 -8
+#define NUM_KINDS 8
 
 DotList asterPattern(int n);
 DotList basePattern(int n,int base);
@@ -20,6 +21,7 @@ DotList fibonacciPattern(int n);
 DotList squarePronicPattern(int n);
 DotList trianglePattern(int n);
 DotList hexagonPattern(int n);
+DotList smooth5Pattern(int n);
 
 bool isComposite(int n);
 bool isPrime(int n);
@@ -28,6 +30,7 @@ bool isSquare(int n);
 bool isPronic(int n);
 bool isTriangle(int n);
 bool isHexagon(int n);
+bool isSmooth5(int n);
 
 DotList kindPattern(int n,int kind);
 bool isKind(int n,int kind);
