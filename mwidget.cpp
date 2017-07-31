@@ -10,23 +10,16 @@ MirasolWidget::MirasolWidget(QWidget *parent):QMainWindow(parent)
   resize(320,240);
   setWindowTitle(QApplication::translate("main", "Mirasol"));
   show();
-  inpline=new QLineEdit(this);
-  inpline->setBackgroundRole(QPalette::Base);
-  //inpline->show();
-  button = new QPushButton(QApplication::translate("main", "Show number"),this);
-  button->move(216,0);
-  //button->show();
   toolbar=new QToolBar(this);
   dotcanvas=new DotCanvas(this);
   for (i=-1;i<2;i++)
     for (j=-1;j<2;j++)
       dots+=xy(i,j);
-  //dotcanvas->setDots(dots);
   setnumber(37);
   setCentralWidget(dotcanvas);
   addToolBar(Qt::TopToolBarArea,toolbar);
   dotcanvas->show();
-  connect(inpline,SIGNAL(textChanged(QString)),this,SLOT(setnumber(QString)));
+  //connect(inpline,SIGNAL(textChanged(QString)),this,SLOT(setnumber(QString)));
 }
 
 void MirasolWidget::setnumber(int num)

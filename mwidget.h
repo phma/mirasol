@@ -5,8 +5,6 @@ class MirasolWidget: public QMainWindow
 {
   Q_OBJECT
 public:
-  QLineEdit *inpline;
-  QPushButton *button;
   DotCanvas *dotcanvas;
   QToolBar *toolbar;
   MirasolWidget(QWidget *parent=0);
