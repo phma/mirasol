@@ -1,4 +1,4 @@
-#include <QtWidgets>
+#include <QMainWindow>
 #include "dotcanvas.h"
 
 class MirasolWidget: public QMainWindow

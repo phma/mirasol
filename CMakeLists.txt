@@ -7,13 +7,14 @@ include(CheckTypeSize)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 
+find_package(Qt5Core)
 find_package(Qt5Widgets)
 
 add_executable(mirasol mirasol.cpp mwidget.cpp dotcanvas.cpp xy.cpp angle.cpp trajectory.cpp dotlist.cpp pattern.cpp random.cpp maction.cpp)
 add_executable(miratest miratest.cpp xy.cpp angle.cpp trajectory.cpp dotlist.cpp
 pattern.cpp random.cpp)
-#target_link_libraries(mirasol Qt4::QtGui)
-target_link_libraries(mirasol Qt5::Widgets)
+target_link_libraries(mirasol Qt5::Widgets Qt5::Core)
+target_link_libraries(miratest Qt5::Core)
 
 set(CMAKE_CXX_FLAGS "-std=c++11")
 install(TARGETS mirasol DESTINATION bin)
