@@ -65,6 +65,8 @@ void MirasolWidget::makeActions()
     actions.push_back(new MirasolAction(this,16));
     for (i=1;i<=NUM_KINDS;i++)
       actions.push_back(new MirasolAction(this,-i));
+    for (i=0;i<actions.size();i++)
+      toolbar->addAction(actions[i]);
   }
 }
 
@@ -72,6 +74,9 @@ void MirasolWidget::unmakeActions()
 {
   int i;
   for (i=0;i<actions.size();i++)
+  {
+    toolbar->removeAction(actions[i]);
     delete actions[i];
+  }
   actions.resize(0);
 }
