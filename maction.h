@@ -1,3 +1,5 @@
+#ifndef MACTION_H
+#define MACTION_H
 #include <QtWidgets>
 
 class MirasolAction: public QAction
@@ -14,3 +16,4 @@ signals:
 private:
   int myKind;
 };
+#endif
