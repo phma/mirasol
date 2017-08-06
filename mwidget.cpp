@@ -12,6 +12,7 @@ MirasolWidget::MirasolWidget(QWidget *parent):QMainWindow(parent)
   show();
   pixmap=new DotPixmap(256,256);
   toolbar=new QToolBar(this);
+  toolbar->setIconSize(QSize(40,40));
   dotcanvas=new DotCanvas(this);
   for (i=-1;i<2;i++)
     for (j=-1;j<2;j++)
@@ -68,7 +69,7 @@ void MirasolWidget::makeActions()
     kindlist.push_back(16);
     for (i=1;i<=NUM_KINDS;i++)
       kindlist.push_back(-i);
-    for (i=1;i<=kindlist.size();i++)
+    for (i=0;i<kindlist.size();i++)
     {
       pixmap->setDots(kindPattern(shownNumbers[(kindlist[i]>0)?0:-kindlist[i]],kindlist[i]));
       pixmap->paintDots();
