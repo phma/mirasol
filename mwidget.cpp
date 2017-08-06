@@ -7,7 +7,7 @@ MirasolWidget::MirasolWidget(QWidget *parent):QMainWindow(parent)
 {
   DotList dots;
   int i,j;
-  resize(640,480);
+  resize(707,500);
   setWindowTitle(QApplication::translate("main", "Mirasol"));
   show();
   pixmap=new DotPixmap(256,256);
@@ -104,12 +104,24 @@ void MirasolWidget::makeActions()
     }
     for (i=0;i<actions.size();i++)
       toolbar->addAction(actions[i]);
+    upAction=new QAction(this);
+    downAction=new QAction(this);
+    pixmap->paintArrow(1);
+    upAction->setIcon(QIcon(*pixmap));
+    pixmap->paintArrow(-1);
+    downAction->setIcon(QIcon(*pixmap));
+    toolbar->addAction(upAction);
+    toolbar->addAction(downAction);
   }
 }
 
 void MirasolWidget::unmakeActions()
 {
   int i;
+  toolbar->removeAction(downAction);
+  toolbar->removeAction(upAction);
+  delete downAction;
+  delete upAction;
   for (i=0;i<actions.size();i++)
   {
     toolbar->removeAction(actions[i]);

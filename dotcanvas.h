@@ -38,6 +38,7 @@ public:
   void setDots(DotList newDots);
   void setSize();
   void paintDots();
+  void paintArrow(int dir);
 private:
   QPen pen;
   QBrush brush;

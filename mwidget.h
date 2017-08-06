@@ -10,6 +10,7 @@ public:
   DotCanvas *dotcanvas;
   QToolBar *toolbar;
   std::vector<MirasolAction *> actions;
+  QAction *upAction,*downAction;
   MirasolWidget(QWidget *parent=0);
   ~MirasolWidget();
   void makeActions();

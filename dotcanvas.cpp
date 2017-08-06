@@ -140,3 +140,17 @@ void DotPixmap::paintDots()
     painter.drawEllipse(QPointF(canvasdot.getx(),canvasdot.gety()),DOTRADIUS*scale,DOTRADIUS*scale);
   }
 }
+
+void DotPixmap::paintArrow(int dir)
+{
+  QPainter painter(this);
+  QPolygonF polygon;
+  fill();
+  painter.setPen(pen);
+  painter.setBrush(Qt::blue);
+  painter.setRenderHint(QPainter::Antialiasing,true);
+  polygon<<QPointF(width()/2.-dir*width()*0.4,height()/2.-dir*height()*0.1)
+         <<QPointF(width()/2.                ,height()/2.+dir*height()*0.2)
+         <<QPointF(width()/2.+dir*width()*0.4,height()/2.-dir*height()*0.1);
+  painter.drawConvexPolygon(polygon);
+}
