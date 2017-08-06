@@ -129,7 +129,7 @@ DotList squarePronicPattern(int n)
 {
   int i,j,littleDiv,bigDiv;
   DotList ret;
-  for (littleDiv=floor(sqrt(n));n%littleDiv;--littleDiv);
+  for (littleDiv=floor(sqrt(n));n>0 && n%littleDiv;--littleDiv);
   if (littleDiv)
     bigDiv=n/littleDiv;
   else
@@ -208,7 +208,7 @@ bool isPrime(int n)
 {
   int littleDiv;
   for (littleDiv=floor(sqrt(n));n>0 && n%littleDiv;--littleDiv);
-  return littleDiv==1;
+  return littleDiv==1 && n>1;
 }
 
 bool isFibonacci(int n)

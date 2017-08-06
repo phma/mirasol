@@ -18,7 +18,7 @@ void MirasolAction::activate(ActionEvent event)
 
 bool MirasolAction::event(QEvent *e)
 {
-  cout<<"button "<<myKind<<" event "<<e->type()<<endl;
+  //cout<<"button "<<myKind<<" event "<<e->type()<<endl;
   if (e->type()==QEvent::ActionChanged)
     kindChanged(myKind);
   return QAction::event(e);

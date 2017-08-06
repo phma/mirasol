@@ -22,9 +22,8 @@ MirasolWidget::MirasolWidget(QWidget *parent):QMainWindow(parent)
   addToolBar(Qt::TopToolBarArea,toolbar);
   dotcanvas->show();
   makeActions();
-  setNumber(30);
-  setKind(KIND_COMPOSITE);
-  //connect(inpline,SIGNAL(textChanged(QString)),this,SLOT(setnumber(QString)));
+  setNumber(0);
+  setKind(KIND_COMPOSITE); // BUG: it comes up with the kind set to the last gray button
 }
 
 MirasolWidget::~MirasolWidget()
@@ -47,13 +46,13 @@ void MirasolWidget::setNumber(int num)
 
 void MirasolWidget::prepareSetKind(int kind)
 {
-  cout<<"kind="<<kind<<endl;
+  //cout<<"kind="<<kind<<endl;
   preKindDots=kind;
 }
 
 void MirasolWidget::setKind(bool checked)
 {
-  cout<<"kind="<<preKindDots<<endl;
+  //cout<<"kind="<<preKindDots<<endl;
   if (kindDots!=preKindDots)
   {
     kindDots=preKindDots;
