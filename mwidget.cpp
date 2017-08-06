@@ -10,6 +10,7 @@ MirasolWidget::MirasolWidget(QWidget *parent):QMainWindow(parent)
   resize(320,240);
   setWindowTitle(QApplication::translate("main", "Mirasol"));
   show();
+  pixmap=new DotPixmap(256,256);
   toolbar=new QToolBar(this);
   dotcanvas=new DotCanvas(this);
   for (i=-1;i<2;i++)
@@ -28,6 +29,7 @@ MirasolWidget::~MirasolWidget()
   unmakeActions();
   delete dotcanvas;
   delete toolbar;
+  delete pixmap;
 }
 
 void MirasolWidget::setnumber(int num)
@@ -58,13 +60,21 @@ int shownNumbers[]={35,36,37,34,36,30,36,37,30};
 void MirasolWidget::makeActions()
 {
   int i;
+  vector<int> kindlist;
   if (actions.size()==0)
   {
-    actions.push_back(new MirasolAction(this,0));
-    actions.push_back(new MirasolAction(this,10));
-    actions.push_back(new MirasolAction(this,16));
+    kindlist.push_back(0);
+    kindlist.push_back(10);
+    kindlist.push_back(16);
     for (i=1;i<=NUM_KINDS;i++)
-      actions.push_back(new MirasolAction(this,-i));
+      kindlist.push_back(-i);
+    for (i=1;i<=kindlist.size();i++)
+    {
+      pixmap->setDots(kindPattern(shownNumbers[(kindlist[i]>0)?0:-kindlist[i]],kindlist[i]));
+      pixmap->paintDots();
+      actions.push_back(new MirasolAction(this,kindlist[i]));
+      actions.back()->setIcon(QIcon(*pixmap));
+    }
     for (i=0;i<actions.size();i++)
       toolbar->addAction(actions[i]);
   }

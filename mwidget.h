@@ -19,4 +19,5 @@ public slots:
   void setnumber(const QString &newtext);
 private:
   int numDots;
+  DotPixmap *pixmap;
 };
