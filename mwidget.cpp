@@ -7,6 +7,7 @@ MirasolWidget::MirasolWidget(QWidget *parent):QMainWindow(parent)
 {
   DotList dots;
   int i,j;
+  maxNumDots=1000;
   resize(707,500);
   setWindowTitle(QApplication::translate("main", "Mirasol"));
   show();
@@ -66,6 +67,22 @@ void MirasolWidget::setNumber(const QString &newtext)
   setNumber(newtext.toInt());
 }
 
+void MirasolWidget::increaseNumber(bool checked)
+{
+  int i;
+  for (i=numDots+1;i<=maxNumDots && !isKind(i,kindDots);i++);
+  if (i<=maxNumDots)
+    setNumber(i);
+}
+
+void MirasolWidget::decreaseNumber(bool checked)
+{
+  int i;
+  for (i=numDots-1;i>=0 && !isKind(i,kindDots);i--);
+  if (i>=0)
+    setNumber(i);
+}
+
 /* The buttons are labeled with the following numbers in the appropriate pattern:
  * Asteraceous (which is considered base 0): 35.
  * All bases (which may range from 6 to 34): 35.
@@ -112,6 +129,8 @@ void MirasolWidget::makeActions()
     downAction->setIcon(QIcon(*pixmap));
     toolbar->addAction(upAction);
     toolbar->addAction(downAction);
+    connect(upAction,SIGNAL(triggered(bool)),this,SLOT(increaseNumber(bool)));
+    connect(downAction,SIGNAL(triggered(bool)),this,SLOT(decreaseNumber(bool)));
   }
 }
 

@@ -200,14 +200,14 @@ DotList smooth5Pattern(int n)
 bool isComposite(int n)
 {
   int littleDiv;
-  for (littleDiv=floor(sqrt(n));n%littleDiv;--littleDiv);
+  for (littleDiv=floor(sqrt(n));n>0 && n%littleDiv;--littleDiv);
   return littleDiv>1;
 }
 
 bool isPrime(int n)
 {
   int littleDiv;
-  for (littleDiv=floor(sqrt(n));n%littleDiv;--littleDiv);
+  for (littleDiv=floor(sqrt(n));n>0 && n%littleDiv;--littleDiv);
   return littleDiv==1;
 }
 
@@ -221,7 +221,7 @@ bool isFibonacci(int n)
 bool isSquare(int n)
 {
   int littleDiv,bigDiv;
-  for (littleDiv=floor(sqrt(n));n%littleDiv;--littleDiv);
+  for (littleDiv=floor(sqrt(n));n>0 && n%littleDiv;--littleDiv);
   if (littleDiv)
     bigDiv=n/littleDiv;
   else
@@ -232,7 +232,7 @@ bool isSquare(int n)
 bool isPronic(int n)
 {
   int littleDiv,bigDiv;
-  for (littleDiv=floor(sqrt(n));n%littleDiv;--littleDiv);
+  for (littleDiv=floor(sqrt(n));n>0 && n%littleDiv;--littleDiv);
   if (littleDiv)
     bigDiv=n/littleDiv;
   else

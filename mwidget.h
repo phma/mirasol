@@ -21,6 +21,8 @@ signals:
 public slots:
   void setNumber(int num);
   void setNumber(const QString &newtext);
+  void increaseNumber(bool checked);
+  void decreaseNumber(bool checked);
   void prepareSetKind(int kind);
   void setKind(bool checked);
 private:
