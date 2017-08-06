@@ -1,3 +1,4 @@
+#include <iostream>
 #include "maction.h"
 #include "pattern.h"
 using namespace std;
@@ -13,6 +14,14 @@ void MirasolAction::activate(ActionEvent event)
   if (event==QAction::Trigger)
     kindChanged(myKind);
   QAction::activate(event);
+}
+
+bool MirasolAction::event(QEvent *e)
+{
+  cout<<"button "<<myKind<<" event "<<e->type()<<endl;
+  if (e->type()==QEvent::ActionChanged)
+    kindChanged(myKind);
+  return QAction::event(e);
 }
 
 void MirasolAction::setKind(int kind)

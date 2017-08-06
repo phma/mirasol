@@ -13,6 +13,8 @@ public slots:
   void setNumber(int num); // sets enabled if num is my kind of number
 signals:
   void kindChanged(int kind); // emitted on activate(triggered)
+protected:
+  bool event(QEvent *e);
 private:
   int myKind;
 };

@@ -14,10 +14,18 @@ public:
   ~MirasolWidget();
   void makeActions();
   void unmakeActions();
+signals:
+  void numberChanged(int num);
+  void kindChanged(int kind);
 public slots:
-  void setnumber(int num);
-  void setnumber(const QString &newtext);
+  void setNumber(int num);
+  void setNumber(const QString &newtext);
+  void prepareSetKind(int kind);
+  void setKind(bool checked);
 private:
   int numDots;
+  int maxNumDots;
+  int kindDots;
+  int preKindDots; // set by one signal in preparation for another signal, which has no argument
   DotPixmap *pixmap;
 };

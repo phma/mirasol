@@ -7,7 +7,7 @@ MirasolWidget::MirasolWidget(QWidget *parent):QMainWindow(parent)
 {
   DotList dots;
   int i,j;
-  resize(320,240);
+  resize(640,480);
   setWindowTitle(QApplication::translate("main", "Mirasol"));
   show();
   pixmap=new DotPixmap(256,256);
@@ -17,11 +17,12 @@ MirasolWidget::MirasolWidget(QWidget *parent):QMainWindow(parent)
   for (i=-1;i<2;i++)
     for (j=-1;j<2;j++)
       dots+=xy(i,j);
-  setnumber(30);
   setCentralWidget(dotcanvas);
   addToolBar(Qt::TopToolBarArea,toolbar);
   dotcanvas->show();
   makeActions();
+  setNumber(30);
+  setKind(KIND_COMPOSITE);
   //connect(inpline,SIGNAL(textChanged(QString)),this,SLOT(setnumber(QString)));
 }
 
@@ -33,15 +34,36 @@ MirasolWidget::~MirasolWidget()
   delete pixmap;
 }
 
-void MirasolWidget::setnumber(int num)
+void MirasolWidget::setNumber(int num)
 {
-  cout<<num<<endl;
-  dotcanvas->setDots(smooth5Pattern(num));
+  if (numDots!=num)
+  {
+    numDots=num;
+    dotcanvas->setDots(kindPattern(numDots,kindDots));
+    numberChanged(num);
+  }
 }
 
-void MirasolWidget::setnumber(const QString &newtext)
+void MirasolWidget::prepareSetKind(int kind)
 {
-  setnumber(newtext.toInt());
+  cout<<"kind="<<kind<<endl;
+  preKindDots=kind;
+}
+
+void MirasolWidget::setKind(bool checked)
+{
+  cout<<"kind="<<preKindDots<<endl;
+  if (kindDots!=preKindDots)
+  {
+    kindDots=preKindDots;
+    dotcanvas->setDots(kindPattern(numDots,kindDots));
+    kindChanged(kindDots);
+  }
+}
+
+void MirasolWidget::setNumber(const QString &newtext)
+{
+  setNumber(newtext.toInt());
 }
 
 /* The buttons are labeled with the following numbers in the appropriate pattern:
@@ -75,6 +97,10 @@ void MirasolWidget::makeActions()
       pixmap->paintDots();
       actions.push_back(new MirasolAction(this,kindlist[i]));
       actions.back()->setIcon(QIcon(*pixmap));
+      connect(actions.back(),SIGNAL(triggered(bool)),this,SLOT(setKind(bool)));
+      connect(actions.back(),SIGNAL(kindChanged(int)),this,SLOT(prepareSetKind(int)));
+      connect(this,SIGNAL(kindChanged(int)),actions.back(),SLOT(setKind(int)));
+      connect(this,SIGNAL(numberChanged(int)),actions.back(),SLOT(setNumber(int)));
     }
     for (i=0;i<actions.size();i++)
       toolbar->addAction(actions[i]);
