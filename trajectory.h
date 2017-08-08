@@ -44,6 +44,7 @@ private:
 class MultiTrajectory
 {
 public:
+  MultiTrajectory();
   int foreAft(QTime t); // -1 if t is before, 0 if during, 1 if after
   DotList atTime(QTime t);
   void setTime(QTime Start,int Duration);
@@ -54,4 +55,3 @@ private:
   std::vector<Trajectory> traj;
   int timeSinceStart(QTime t);
 };
-

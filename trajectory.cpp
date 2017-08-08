@@ -138,7 +138,13 @@ Trajectory operator-(const Trajectory &l,const Trajectory &r)
   ret.end=l.end-r.end;
   return ret;
 }
-/*
+
+MultiTrajectory::MultiTrajectory()
+{
+  start.currentTime();
+  duration=0;
+}
+
 int MultiTrajectory::timeSinceStart(QTime t)
 {
   int interval=start.msecsTo(t);
@@ -155,7 +161,7 @@ int MultiTrajectory::foreAft(QTime t)
   return (interval>duration)-(interval<0);
 }
 
-DotList MultiTrajectory::DotList atTime(QTime t)
+DotList MultiTrajectory::atTime(QTime t)
 {
   int interval=timeSinceStart(t);
   int i;
@@ -179,4 +185,4 @@ void MultiTrajectory::setTime(QTime Start,int Duration)
 void MultiTrajectory::setTraj(std::vector<Trajectory> Traj)
 {
   traj=Traj;
-}*/
+}
