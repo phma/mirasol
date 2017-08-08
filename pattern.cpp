@@ -37,8 +37,10 @@ DotList asterPattern(int n)
  */
 {
   static int asterAngle;
-  int i;
+  int i,r;
   DotList ret;
+  r=rng.ucrandom();
+  asterAngle+=(r<<23)+sqr(r);
   for (i=0;i<n;i++)
   {
     asterAngle+=PHITURN;
