@@ -1,3 +1,24 @@
+/******************************************************/
+/*                                                    */
+/* pattern.h - figurate numbers and patterns          */
+/*                                                    */
+/******************************************************/
+/* Copyright 2017 Pierre Abbat.
+ * This file is part of Mirasol.
+ * 
+ * Mirasol is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Mirasol is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Mirasol. If not, see <http://www.gnu.org/licenses/>.
+ */
 #include "dotlist.h"
 #define M_SQRT_3_4 0.86602540378443864676372317
 #define M_SQRT_3 1.73205080756887729352744634
