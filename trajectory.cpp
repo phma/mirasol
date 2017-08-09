@@ -26,6 +26,8 @@
 
 using namespace std;
 
+int splitAngle;
+
 double minquad(double x0,double y0,double x1,double y1,double x2,double y2)
 /* Finds the minimum (or maximum) of a quadratic, given three points on it.
  * x1 should be between x0 and x2.
@@ -143,6 +145,62 @@ MultiTrajectory::MultiTrajectory()
 {
   start.currentTime();
   duration=0;
+}
+
+MultiTrajectory::MultiTrajectory(DotList startList,int startAngle,DotList endList,int endAngle)
+/* Constructs a MultiTrajectory taking dots in startList by straight lines
+ * to dots in endList. If startAngle and endAngle are equal, the total length
+ * of all the trajectories is close to minimum. If one of the DotLists is
+ * bigger (which it isn't), some of the dots are discarded, but which ones
+ * depends on the angle.
+ */
+{
+  if (startList.size()<2 || endList.size()<2)
+  {
+    if (startList.size()>0 && endList.size()>0)
+      traj.push_back(Trajectory(startList[0],endList[0]));
+    start.currentTime();
+    duration=0;
+  }
+  else
+  {
+    xy startDir=cossin(startAngle),endDir=cossin(endAngle);
+    multimap<double,xy> startOrder,endOrder;
+    int i;
+    multimap<double,xy>::iterator oi;
+    DotList startFirst,startLast,endFirst,endLast;
+    for (i=0;i<startList.size();i++)
+      startOrder.insert(pair<double,xy>(dot(startDir,startList[i]),startList[i]));
+    for (i=0;i<endList.size();i++)
+      endOrder.insert(pair<double,xy>(dot(endDir,endList[i]),endList[i]));
+    for (oi=startOrder.begin();oi!=startOrder.end();oi++)
+      if (startFirst.size()*2<startList.size())
+        startFirst+=(oi->second);
+      else
+        startLast+=(oi->second);
+    for (oi=endOrder.begin();oi!=endOrder.end();oi++)
+      if (endFirst.size()*2<endList.size())
+        endFirst+=(oi->second);
+      else
+        endLast+=(oi->second);
+    MultiTrajectory firstHalf(startFirst,startAngle+PHI2TURN,endFirst,endAngle+PHI2TURN);
+    MultiTrajectory lastHalf(startLast,startAngle+PHI2TURN,endLast,endAngle+PHI2TURN);
+    // PHI2TURN is 445°, just over 5° shy of a right angle, but it's irrational.
+    for (i=0;i<firstHalf.traj.size();i++)
+      traj.push_back(firstHalf.traj[i]);
+    for (i=0;i<lastHalf.traj.size();i++)
+      traj.push_back(lastHalf.traj[i]);
+    start=firstHalf.start;
+    duration=start.msecsTo(lastHalf.start)+lastHalf.duration;
+    if (duration<0)
+      duration+=86400000;
+  }
+}
+
+MultiTrajectory::MultiTrajectory(DotList startList,int twistAngle,DotList endList):
+  MultiTrajectory(startList,splitAngle,endList,splitAngle+twistAngle)
+{
+  splitAngle+=PHITURN;
 }
 
 int MultiTrajectory::timeSinceStart(QTime t)
