@@ -20,9 +20,12 @@
  * along with Mirasol. If not, see <http://www.gnu.org/licenses/>.
  */
 #include <QMainWindow>
+#include <QTimer>
 #include <vector>
+#include <queue>
 #include "dotcanvas.h"
 #include "maction.h"
+#include "trajectory.h"
 
 class MirasolWidget: public QMainWindow
 {
@@ -32,10 +35,12 @@ public:
   QToolBar *toolbar;
   std::vector<MirasolAction *> actions;
   QAction *upAction,*downAction;
+  QTimer *timer;
   MirasolWidget(QWidget *parent=0);
   ~MirasolWidget();
   void makeActions();
   void unmakeActions();
+  void queuePattern(DotList pattern);
 signals:
   void numberChanged(int num);
   void kindChanged(int kind);
@@ -46,10 +51,14 @@ public slots:
   void decreaseNumber(bool checked);
   void prepareSetKind(int kind);
   void setKind(bool checked);
+  void animateDots();
 private:
   int numDots;
   int maxNumDots;
   int kindDots;
   int preKindDots; // set by one signal in preparation for another signal, which has no argument
+  int changeTime,noChangeTime;
+  std::queue<MultiTrajectory> dotsQueue;
+  DotList lastDots;
   DotPixmap *pixmap;
 };

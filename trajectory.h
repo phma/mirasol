@@ -50,6 +50,8 @@ public:
   DotList atTime(QTime t);
   void setTime(QTime Start,int Duration);
   void setTraj(std::vector<Trajectory> Traj);
+  QTime getStartTime();
+  QTime getEndTime();
 private:
   QTime start;
   int duration;

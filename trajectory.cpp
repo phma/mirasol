@@ -143,7 +143,7 @@ Trajectory operator-(const Trajectory &l,const Trajectory &r)
 
 MultiTrajectory::MultiTrajectory()
 {
-  start.currentTime();
+  start=QDateTime::currentDateTimeUtc().time();
   duration=0;
 }
 
@@ -159,7 +159,7 @@ MultiTrajectory::MultiTrajectory(DotList startList,int startAngle,DotList endLis
   {
     if (startList.size()>0 && endList.size()>0)
       traj.push_back(Trajectory(startList[0],endList[0]));
-    start.currentTime();
+    start=QDateTime::currentDateTimeUtc().time();
     duration=0;
   }
   else
@@ -243,4 +243,14 @@ void MultiTrajectory::setTime(QTime Start,int Duration)
 void MultiTrajectory::setTraj(std::vector<Trajectory> Traj)
 {
   traj=Traj;
+}
+
+QTime MultiTrajectory::getStartTime()
+{
+  return start;
+}
+
+QTime MultiTrajectory::getEndTime()
+{
+  return start.addMSecs(duration);
 }
