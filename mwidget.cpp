@@ -40,10 +40,10 @@ MirasolWidget::MirasolWidget(QWidget *parent):QMainWindow(parent)
   addToolBar(Qt::TopToolBarArea,toolbar);
   dotcanvas->show();
   makeActions();
-  setNumber(0);
-  setKind(KIND_COMPOSITE); // BUG: it comes up with the kind set to the last gray button
   changeTime=64; // ms that a static MultiTrajectory runs when the new number is different
   noChangeTime=1000; // ms that a moving MultiTrajectory runs when the number isn't changed but the pattern is
+  setNumber(0);
+  setKind(KIND_COMPOSITE); // BUG: it comes up with the kind set to the last gray button
   timer->start(changeTime);
   connect(timer,SIGNAL(timeout()),this,SLOT(animateDots()));
 }
@@ -93,7 +93,7 @@ void MirasolWidget::queuePattern(DotList pattern)
   if (dotsQueue.empty())
   {
     startTime=QDateTime::currentDateTimeUtc().time();
-    //startTime=startTime.addMSecs(changeTime);
+    startTime=startTime.addMSecs(changeTime);
     startPattern=lastDots;
   }
   else
@@ -124,6 +124,7 @@ void MirasolWidget::animateDots()
    */
   //timeStr=now.toString(Qt::ISODate);
   //cout<<timeStr.toStdString()<<'\r';
+  //cout<<dotsQueue.size()<<"  \r";
   //cout.flush();
   if (dotsQueue.size())
   {
