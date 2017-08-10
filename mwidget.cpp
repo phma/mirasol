@@ -41,9 +41,11 @@ MirasolWidget::MirasolWidget(QWidget *parent):QMainWindow(parent)
   dotcanvas->show();
   makeActions();
   changeTime=64; // ms that a static MultiTrajectory runs when the new number is different
-  noChangeTime=1000; // ms that a moving MultiTrajectory runs when the number isn't changed but the pattern is
+  noChangeTime=32; // set short time temporarily so that it won't spend two seconds drawing nothing
   setNumber(0);
-  setKind(KIND_COMPOSITE); // BUG: it comes up with the kind set to the last gray button
+  prepareSetKind(0);
+  setKind(true);
+  noChangeTime=1000; // ms that a moving MultiTrajectory runs when the number isn't changed but the pattern is
   timer->start(changeTime);
   connect(timer,SIGNAL(timeout()),this,SLOT(animateDots()));
 }
@@ -62,7 +64,7 @@ void MirasolWidget::setNumber(int num)
   {
     numDots=num;
     //dotcanvas->setDots(kindPattern(numDots,kindDots));
-    queuePattern(kindPattern(numDots,kindDots));
+    queuePattern(kindPattern(numDots,kindDots),kindDots);
     numberChanged(num);
   }
 }
@@ -80,12 +82,12 @@ void MirasolWidget::setKind(bool checked)
   {
     kindDots=preKindDots;
     //dotcanvas->setDots(kindPattern(numDots,kindDots));
-    queuePattern(kindPattern(numDots,kindDots));
+    queuePattern(kindPattern(numDots,kindDots),kindDots);
     kindChanged(kindDots);
   }
 }
 
-void MirasolWidget::queuePattern(DotList pattern)
+void MirasolWidget::queuePattern(DotList pattern,int kind)
 {
   DotList startPattern;
   QTime startTime;
@@ -110,6 +112,7 @@ void MirasolWidget::queuePattern(DotList pattern)
   }
   MultiTrajectory traj(startPattern,0,pattern);
   traj.setTime(startTime,duration);
+  traj.setKind(kind);
   dotsQueue.push(traj);
 }
 
@@ -118,20 +121,22 @@ void MirasolWidget::animateDots()
   QTime now;
   QString timeStr;
   bool popped;
+  int lastKind;
   now=QDateTime::currentDateTimeUtc().time();
   /* QTime::currentTime returns local, which will cause problems on
    * Adenauer Day and Auerbach Day.
    */
   //timeStr=now.toString(Qt::ISODate);
   //cout<<timeStr.toStdString()<<'\r';
-  //cout<<dotsQueue.size()<<"  \r";
-  //cout.flush();
+  cout<<dotsQueue.size()<<"  \r";
+  cout.flush();
   if (dotsQueue.size())
   {
     do
     {
       popped=false;
       lastDots=dotsQueue.front().atTime(now);
+      lastKind=dotsQueue.front().getKind();
       if (dotsQueue.front().foreAft(now)==1)
       {
         dotsQueue.pop();
@@ -140,6 +145,11 @@ void MirasolWidget::animateDots()
     } while (dotsQueue.size() && popped);
     dotcanvas->setDots(lastDots);
     timer->setInterval(0);
+    if (dotsQueue.empty())
+    {
+      kindChanged(lastKind);
+      //cout<<"Set kind to "<<lastKind<<endl;
+    }
   }
   else
     timer->setInterval(changeTime);

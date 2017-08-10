@@ -40,7 +40,7 @@ public:
   ~MirasolWidget();
   void makeActions();
   void unmakeActions();
-  void queuePattern(DotList pattern);
+  void queuePattern(DotList pattern,int kind);
 signals:
   void numberChanged(int num);
   void kindChanged(int kind);

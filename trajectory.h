@@ -50,11 +50,14 @@ public:
   DotList atTime(QTime t);
   void setTime(QTime Start,int Duration);
   void setTraj(std::vector<Trajectory> Traj);
+  void setKind(int Kind);
   QTime getStartTime();
   QTime getEndTime();
+  int getKind();
 private:
   QTime start;
   int duration;
+  int kind;
   std::vector<Trajectory> traj;
   MultiTrajectory(DotList startList,int startAngle,DotList endList,int endAngle);
   int timeSinceStart(QTime t);

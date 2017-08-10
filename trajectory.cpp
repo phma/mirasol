@@ -245,6 +245,11 @@ void MultiTrajectory::setTraj(std::vector<Trajectory> Traj)
   traj=Traj;
 }
 
+void MultiTrajectory::setKind(int Kind)
+{
+  kind=Kind;
+}
+
 QTime MultiTrajectory::getStartTime()
 {
   return start;
@@ -253,4 +258,9 @@ QTime MultiTrajectory::getStartTime()
 QTime MultiTrajectory::getEndTime()
 {
   return start.addMSecs(duration);
+}
+
+int MultiTrajectory::getKind()
+{
+  return kind;
 }

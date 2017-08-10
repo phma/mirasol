@@ -33,7 +33,10 @@ MirasolAction::MirasolAction(QObject *parent,int kind):QAction(parent)
 void MirasolAction::activate(ActionEvent event)
 {
   if (event==QAction::Trigger)
+  {
+    //cout<<"Button "<<myKind<<" triggered"<<endl;
     kindChanged(myKind);
+  }
   QAction::activate(event);
 }
 
