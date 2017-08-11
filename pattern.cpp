@@ -49,6 +49,17 @@ DotList asterPattern(int n)
   return ret;
 }
 
+/* Some people, because of Doman's or Shichida's theories, may want random
+ * patterns of dots. To generate a random pattern of dots, to pick dot #n
+ * (starting at 0):
+ * 1. Pick a random point in a circle of area an+b.
+ * 2. If it's within 1 of a previous point (use a square lattice of hash
+ *    buckets), go back to step 1.
+ * 3. Push it back and put it into the appropriate hash bucket.
+ * a must be greater than sqrt(3/4) and should be less than 1, and a+b must
+ * be greater than π.
+ */
+
 DotList productPattern(vector<int> ns)
 {
   int i;
