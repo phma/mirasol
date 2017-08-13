@@ -267,3 +267,45 @@ int MultiTrajectory::getKind()
 {
   return kind;
 }
+
+void MultiTrajectory::bendAvoid()
+// Bend the trajectories so that they avoid colliding.
+{
+  int i,j,iter;
+  bool anyadj=true;
+  Trajectory diff;
+  double closeTime;
+  xy closeSpace;
+  vector<xy> adjustments(traj.size());
+  for (iter=0;anyadj;i++)
+  {
+    for (i=0;i<traj.size();i++)
+      adjustments[i]=xy(0,0);
+    anyadj=false;
+    for (i=0;i<traj.size();i++)
+      for (j=0;j<i;j++)
+      {
+        diff=traj[i]-traj[j];
+        closeTime=diff.closest();
+        closeSpace=diff.position(closeTime);
+        if (closeSpace.length()<1 && closeTime>0 && closeTime<1)
+        {
+          anyadj=true;
+          if (closeSpace.length()==0)
+          {
+            if (closeTime>0.5)
+              closeSpace=turn90(diff.position(closeTime-0.0001));
+            else
+              closeSpace=turn90(diff.position(closeTime+0.0001));
+          }
+          closeSpace/=closeSpace.length()*(iter+1);
+          closeSpace*=closeTime*(1-closeTime)*4;
+          adjustments[i]+=closeSpace;
+          adjustments[j]-=closeSpace;
+        }
+      }
+    for (i=0;i<traj.size();i++)
+      traj[i].push(adjustments[i]);
+  }
+  cout<<traj.size()<<" points took "<<iter<<" iterations"<<endl;
+}

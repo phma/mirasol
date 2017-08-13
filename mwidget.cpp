@@ -95,7 +95,7 @@ void MirasolWidget::queuePattern(DotList pattern,int kind)
   if (dotsQueue.empty())
   {
     startTime=QDateTime::currentDateTimeUtc().time();
-    startTime=startTime.addMSecs(changeTime);
+    startTime=startTime.addMSecs(changeTime+1000);
     startPattern=lastDots;
   }
   else
@@ -111,6 +111,7 @@ void MirasolWidget::queuePattern(DotList pattern,int kind)
     startPattern=pattern;
   }
   MultiTrajectory traj(startPattern,0,pattern);
+  traj.bendAvoid();
   traj.setTime(startTime,duration);
   traj.setKind(kind);
   dotsQueue.push(traj);

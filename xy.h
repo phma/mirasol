@@ -37,12 +37,14 @@ public:
   virtual void roscat(xy tfrom,int ro,double sca,xy tto); // rotate, scale, translate
   friend xy operator+(const xy &l,const xy &r);
   friend xy operator+=(xy &l,const xy &r);
+  friend xy operator-=(xy &l,const xy &r);
   friend xy operator-(const xy &l,const xy &r);
   friend xy operator-(const xy &r);
   friend xy operator*(const xy &l,double r);
   friend xy operator*(double l,const xy &r);
   friend xy operator/(const xy &l,double r);
   friend xy operator/=(xy &l,double r);
+  friend xy operator*=(xy &l,double r);
   friend bool operator!=(const xy &l,const xy &r);
   friend bool operator==(const xy &l,const xy &r);
   friend xy turn90(xy a);

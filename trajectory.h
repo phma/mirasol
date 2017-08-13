@@ -54,6 +54,7 @@ public:
   QTime getStartTime();
   QTime getEndTime();
   int getKind();
+  void bendAvoid();
 private:
   QTime start;
   int duration;
