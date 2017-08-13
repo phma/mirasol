@@ -22,6 +22,7 @@
 #include "trajectory.h"
 #include <map>
 #include <set>
+#include <iostream>
 #include "angle.h"
 
 using namespace std;
@@ -72,7 +73,7 @@ double Trajectory::closest()
  * are closest to each other, do this to their difference.
  */
 {
-  int nstartpoints,i,angerr,angtoler,endangle;
+  int nstartpoints,i,angerr,samecount,endangle;
   double closest,closedist,lastclosedist,fardist,len2,vertex;
   map<double,double> stdist;
   set<double> inserenda,delenda;
@@ -116,10 +117,11 @@ double Trajectory::closest()
 	inserenda.insert(vertex);
     }
     if (lastclosedist>closedist)
-      angtoler=1;
+      samecount=0;
     else
-      angtoler*=7;
-  } while (16777216>=angtoler);
+      samecount++;
+  } while (samecount<7 && stdist.size()<1000);
+  //cout<<"samecount "<<samecount<<" stdist "<<stdist.size()<<endl;
   return closest;
 }
 
