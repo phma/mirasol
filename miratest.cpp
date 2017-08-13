@@ -31,7 +31,7 @@ using namespace std;
 void testTrajectory()
 {
   Trajectory tra0(xy(2,3),xy(8,4)),tra1(xy(5,8),xy(16,8)),tra2;
-  Trajectory tra3(xy(-1,0.5),xy(2,3.5));
+  Trajectory tra3(xy(-1,0.5),xy(2,3.5)),tra4(xy(-5,2.5),xy(10,17.5));
   xy p0,p1;
   int i;
   double closetime;
@@ -63,6 +63,14 @@ void testTrajectory()
   closetime=tra3.closest();
   cout<<"parabola closest at "<<closetime<<endl;
   assert(closetime==0);
+  tra4.push(xy(0,-22.5));
+  /* tra4 is the same parabola as above, magnified by 5. Its closest approach
+   * is at time 1/3, but the distance is 2.5, so closest leaves early, because
+   * distances greater than 1 don't matter.
+   */
+  closetime=tra4.closest();
+  cout<<"parabola closest at "<<closetime<<endl;
+  assert(fabs(closetime*3-1)>1e-2);
 }
 
 double shortestDistance(DotList a)

@@ -116,11 +116,12 @@ double Trajectory::closest()
       if (!stdist.count(vertex) && vertex>=0 && vertex<=1)
 	inserenda.insert(vertex);
     }
+    //cout<<stdist.size()<<" +"<<inserenda.size()<<" -"<<delenda.size()<<endl;
     if (lastclosedist>closedist)
       samecount=0;
     else
       samecount++;
-  } while (samecount<7 && stdist.size()<1000);
+  } while (samecount<7 && stdist.size()<1000 && (stdist.size()<13 || closedist<2));
   //cout<<"samecount "<<samecount<<" stdist "<<stdist.size()<<endl;
   return closest;
 }
