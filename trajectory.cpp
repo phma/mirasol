@@ -73,7 +73,7 @@ double Trajectory::closest()
  * are closest to each other, do this to their difference.
  */
 {
-  int nstartpoints,i,angerr,samecount,endangle;
+  int nstartpoints,i,iter=0,angerr,samecount,endangle;
   double closest,closedist,lastclosedist,fardist,len2,vertex;
   map<double,double> stdist;
   set<double> inserenda,delenda;
@@ -111,7 +111,7 @@ double Trajectory::closest()
 	vertex=-vertex;
       if (vertex>1 && vertex<1.5)
 	vertex=2-vertex;
-      if (stdist.count(vertex) && vertex!=k1->first)
+      if ((stdist.count(vertex) && vertex!=k1->first) || (k1->second-k0->second)*(k2->second-k1->second)>0)
 	delenda.insert(k1->first);
       if (!stdist.count(vertex) && vertex>=0 && vertex<=1)
 	inserenda.insert(vertex);
@@ -121,7 +121,8 @@ double Trajectory::closest()
       samecount=0;
     else
       samecount++;
-  } while (samecount<7 && stdist.size()<1000 && (stdist.size()<13 || closedist<2));
+    iter++;
+  } while (samecount<4 && stdist.size()<1000 && (iter<2 || closedist<2));
   //cout<<"samecount "<<samecount<<" stdist "<<stdist.size()<<endl;
   return closest;
 }
@@ -277,7 +278,7 @@ void MultiTrajectory::bendAvoid()
   double closeTime;
   xy closeSpace;
   vector<xy> adjustments(traj.size());
-  for (iter=0;anyadj;i++)
+  for (iter=0;anyadj;iter++)
   {
     for (i=0;i<traj.size();i++)
       adjustments[i]=xy(0,0);
@@ -288,7 +289,7 @@ void MultiTrajectory::bendAvoid()
         diff=traj[i]-traj[j];
         closeTime=diff.closest();
         closeSpace=diff.position(closeTime);
-        if (closeSpace.length()<1 && closeTime>0 && closeTime<1)
+        if (closeSpace.length()<0.99/sqrt(sqrt(iter+1)) && closeTime>0 && closeTime<1)
         {
           anyadj=true;
           if (closeSpace.length()==0)
