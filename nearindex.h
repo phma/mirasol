@@ -22,6 +22,7 @@
 #include <map>
 #include <vector>
 #include "xy.h"
+#define SQSIZE 2
 
 class XyIndex
 {

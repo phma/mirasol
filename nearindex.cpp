@@ -80,10 +80,10 @@ vector<xy> NearIndex::within(xy center,double radius,bool includeCenter)
 {
   int xofs,yofs,i;
   double dst;
-  XyIndex ctr(floor(center.getx()),floor(center.gety()));
+  XyIndex ctr(floor(center.getx()/SQSIZE),floor(center.gety()/SQSIZE));
   vector<XyInt> *bucket;
   vector<xy> ret;
-  int iradius=ceil(radius+1.415);
+  int iradius=ceil(radius/SQSIZE+1.415);
   for (yofs=-iradius;yofs<=iradius;yofs++)
     for (xofs=-iradius;xofs<=iradius;xofs++)
     {
