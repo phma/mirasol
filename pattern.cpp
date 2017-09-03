@@ -19,16 +19,19 @@
  * You should have received a copy of the GNU General Public License
  * along with Mirasol. If not, see <http://www.gnu.org/licenses/>.
  */
+#include <iostream>
 #include "pattern.h"
 #include <set>
 #include "angle.h"
 #include "random.h"
+#include "nearindex.h"
 #define ASTERSCALE 0.64681617664289504
 #define FIBOSCALE 1.72014502785246199494
 using namespace std;
 
 xy step0(1,0),step60(0.5,M_SQRT_3_4),step120(-0.5,M_SQRT_3_4);
 xy step180(-1,0),step240(-0.5,-M_SQRT_3_4),step300(0.5,-M_SQRT_3_4);
+bool useRandom=true;
 
 DotList asterPattern(int n)
 /* Returns an asteraceous pattern. Pattern invented by H. Vogel in 1979
@@ -40,7 +43,7 @@ DotList asterPattern(int n)
   int i,r;
   DotList ret;
   r=rng.ucrandom();
-  asterAngle+=(r<<23)+sqr(r);
+  asterAngle+=(r<<23)+r*r;
   for (i=0;i<n;i++)
   {
     asterAngle+=PHITURN;
@@ -56,16 +59,53 @@ DotList asterPattern(int n)
  * 2. If it's within 1 of a previous point (use a square lattice of hash
  *    buckets), go back to step 1.
  * 3. Push it back and put it into the appropriate hash bucket.
- * a must be greater than sqrt(3/4) and should be less than 1, and a+b must
- * be greater than π.
+ * a must be greater than sqrt(3/4), and a+b must be greater than π.
  */
+DotList randomPattern(int n)
+{
+  double a=1.6,b=1.6;
+  DotList ret;
+  NearIndex ni;
+  xy candDot;
+  double radius,inRadius=0,outRadius;
+  static int angle;
+  int r,s;
+  while (ret.size()<n)
+  {
+    r=rng.ucrandom();
+    s=rng.ucrandom();
+    angle+=(r<<23)+r*r;
+    outRadius=sqrt((a*ret.size()+b)/M_PI);
+    radius=sqrt((sqr(inRadius)+(sqr(outRadius)-sqr(inRadius))*(s+0.5)/256));
+    inRadius=radius-2;
+    if (inRadius<0)
+      inRadius=0;
+    candDot=cossin(angle)*radius;
+    if (!ni.within(candDot,1,true).size())
+    {
+      ni[candDot]=ret.size();
+      ret+=candDot;
+      cout<<ret.size()<<" of "<<n<<" dots  \r";
+      cout.flush();
+    }
+  }
+  return ret;
+}
+
+DotList numberPattern(int n)
+{
+  if (useRandom)
+    return randomPattern(n);
+  else
+    return asterPattern(n);
+}
 
 DotList productPattern(vector<int> ns)
 {
   int i;
   DotList ret(xy(0,0));
   for (i=0;i<ns.size();i++)
-    ret=ret*asterPattern(ns[i]);
+    ret=ret*numberPattern(ns[i]);
   return ret;
 }
 
@@ -83,7 +123,7 @@ DotList basePattern(int n,int base)
   DotList ret;
   vector<int> baseRep;
   if (base<2 || base>=n)
-    ret=asterPattern(n);
+    ret=numberPattern(n);
   else
   {
     power=1;

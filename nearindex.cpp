@@ -68,7 +68,7 @@ void NearIndex::clear()
 int& NearIndex::operator[](xy inx)
 {
   int i;
-  XyIndex linx(floor(inx.getx()),floor(inx.gety()));
+  XyIndex linx(floor(inx.getx()/SQSIZE),floor(inx.gety()/SQSIZE));
   vector<XyInt>& bucket=lattice[linx];
   for (i=0;i<bucket.size() && bucket[i].loc!=inx;i++);
   if (i>=bucket.size())

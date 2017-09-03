@@ -35,6 +35,8 @@
 #define KIND_SMOOTH5 -8
 #define NUM_KINDS 8
 
+extern bool useRandom;
+
 DotList asterPattern(int n);
 DotList basePattern(int n,int base);
 DotList compositePattern(int n);
