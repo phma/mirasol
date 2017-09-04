@@ -31,7 +31,7 @@ using namespace std;
 
 xy step0(1,0),step60(0.5,M_SQRT_3_4),step120(-0.5,M_SQRT_3_4);
 xy step180(-1,0),step240(-0.5,-M_SQRT_3_4),step300(0.5,-M_SQRT_3_4);
-bool useRandom=true;
+bool useRandom=false;
 
 DotList asterPattern(int n)
 /* Returns an asteraceous pattern. Pattern invented by H. Vogel in 1979

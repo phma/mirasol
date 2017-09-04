@@ -22,6 +22,7 @@
 #include <QTime>
 #include "xy.h"
 #include "dotlist.h"
+#define NTIMES 5
 
 class Trajectory
 /* Represents the motion of a dot from initial position to final position.

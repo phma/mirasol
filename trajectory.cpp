@@ -22,8 +22,10 @@
 #include "trajectory.h"
 #include <map>
 #include <set>
+#include <array>
 #include <iostream>
 #include "angle.h"
+#include "nearindex.h"
 
 using namespace std;
 
@@ -272,20 +274,40 @@ int MultiTrajectory::getKind()
 void MultiTrajectory::bendAvoid()
 // Bend the trajectories so that they avoid colliding.
 {
-  int i,j,iter;
+  int i,j,t,iter;
   bool anyadj=true;
   Trajectory diff;
   double closeTime;
   xy closeSpace;
+  array<NearIndex,NTIMES> ni;
+  set<int> nearTraj;
+  set<int>::iterator it;
+  vector<xy> nearPoints;
   vector<xy> adjustments(traj.size());
   for (iter=0;anyadj;iter++)
   {
     for (i=0;i<traj.size();i++)
       adjustments[i]=xy(0,0);
     anyadj=false;
+    for (t=0;t<NTIMES;t++)
+    {
+      ni[t].clear();
+      for (i=0;i<traj.size();i++)
+        ni[t][traj[i].position(t/(NTIMES-1.))]=i;
+    }
     for (i=0;i<traj.size();i++)
-      for (j=0;j<i;j++)
+    {
+      nearTraj.clear();
+      for (t=0;t<NTIMES;t++)
       {
+        nearPoints=ni[t].within(traj[i].position(t/(NTIMES-1.)),3,false);
+        for (j=0;j<nearPoints.size();j++)
+          nearTraj.insert(ni[t][nearPoints[j]]);
+      }
+      //cout<<nearTraj.size()<<" trajectories are close"<<endl;
+      for (it=nearTraj.begin();it!=nearTraj.end();++it)
+      {
+        j=*it;
         diff=traj[i]-traj[j];
         closeTime=diff.closest();
         closeSpace=diff.position(closeTime);
@@ -299,12 +321,13 @@ void MultiTrajectory::bendAvoid()
             else
               closeSpace=turn90(diff.position(closeTime+0.0001));
           }
-          closeSpace/=closeSpace.length()*(iter+1);
-          closeSpace*=closeTime*(1-closeTime)*4;
+          closeSpace/=closeSpace.length();
+          closeSpace*=closeTime*(1-closeTime)*4*sqrt(iter+1);
           adjustments[i]+=closeSpace;
           adjustments[j]-=closeSpace;
         }
       }
+    }
     for (i=0;i<traj.size();i++)
       traj[i].push(adjustments[i]);
   }
