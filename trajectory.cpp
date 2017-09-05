@@ -129,6 +129,11 @@ double Trajectory::closest()
   return closest;
 }
 
+xy Trajectory::displacement()
+{
+  return end-start;
+}
+
 Trajectory operator+(const Trajectory &l,const Trajectory &r)
 {
   Trajectory ret;
@@ -161,6 +166,7 @@ MultiTrajectory::MultiTrajectory(DotList startList,int startAngle,DotList endLis
  * depends on the angle.
  */
 {
+  double len;
   if (startList.size()<2 || endList.size()<2)
   {
     if (startList.size()>0 && endList.size()>0)
@@ -193,9 +199,21 @@ MultiTrajectory::MultiTrajectory(DotList startList,int startAngle,DotList endLis
     MultiTrajectory lastHalf(startLast,startAngle+PHI2TURN,endLast,endAngle+PHI2TURN);
     // PHI2TURN is 445°, just over 5° shy of a right angle, but it's irrational.
     for (i=0;i<firstHalf.traj.size();i++)
+    {
+      len=firstHalf.traj[i].displacement().length();
+      if (len>1)
+        len=1;
+      firstHalf.traj[i].push(-(startDir+endDir)/2*len);
       traj.push_back(firstHalf.traj[i]);
+    }
     for (i=0;i<lastHalf.traj.size();i++)
+    {
+      len=lastHalf.traj[i].displacement().length();
+      if (len>1)
+        len=1;
+      lastHalf.traj[i].push((startDir+endDir)/2*len);
       traj.push_back(lastHalf.traj[i]);
+    }
     start=firstHalf.start;
     duration=start.msecsTo(lastHalf.start)+lastHalf.duration;
     if (duration<0)

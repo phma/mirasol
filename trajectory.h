@@ -36,6 +36,7 @@ public:
   void push(xy adj);
   xy position(double t);
   double closest(); // Time of closest approach. Done on difference.
+  xy displacement();
   friend Trajectory operator+(const Trajectory &l,const Trajectory &r);
   friend Trajectory operator-(const Trajectory &l,const Trajectory &r);
 private:
