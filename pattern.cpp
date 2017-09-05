@@ -397,3 +397,45 @@ bool isKind(int n,int kind)
       return true;
   }
 }
+
+string kindName(int n)
+{
+  switch (n)
+  {
+    case KIND_COMPOSITE:
+      return "Composite";
+      break;
+    case KIND_PRIME:
+      return "Prime";
+      break;
+    case KIND_FIBONACCI:
+      return "Fibonacci";
+      break;
+    case KIND_SQUARE:
+      return "Square";
+      break;
+    case KIND_PRONIC:
+      return "Pronic";
+      break;
+    case KIND_TRIANGLE:
+      return "Triangular";
+      break;
+    case KIND_HEXAGON:
+      return "Centered Hexagonal";
+      break;
+    case KIND_SMOOTH5:
+      return "5-Smooth";
+      break;
+    case 0:
+      return "No base";
+      break;
+    case 10:
+      return "Decimal";
+      break;
+    case 16:
+      return "Hexadecimal";
+      break;
+    default:
+      return "Base "+to_string(n);
+  }
+}

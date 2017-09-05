@@ -212,13 +212,20 @@ void MirasolWidget::makeActions()
       pixmap->paintDots();
       actions.push_back(new MirasolAction(this,kindlist[i]));
       actions.back()->setIcon(QIcon(*pixmap));
+      actions.back()->setText(QString::fromStdString(kindName(kindlist[i])));
       connect(actions.back(),SIGNAL(triggered(bool)),this,SLOT(setKind(bool)));
       connect(actions.back(),SIGNAL(kindChanged(int)),this,SLOT(prepareSetKind(int)));
       connect(this,SIGNAL(kindChanged(int)),actions.back(),SLOT(setKind(int)));
       connect(this,SIGNAL(numberChanged(int)),actions.back(),SLOT(setNumber(int)));
     }
     for (i=0;i<actions.size();i++)
+    {
       toolbar->addAction(actions[i]);
+      if (kindlist[i]<0)
+        kindMenu->addAction(actions[i]);
+      else
+        baseMenu->addAction(actions[i]);
+    }
     upAction=new QAction(this);
     downAction=new QAction(this);
     pixmap->paintArrow(1);

@@ -19,6 +19,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Mirasol. If not, see <http://www.gnu.org/licenses/>.
  */
+#include <string>
 #include "dotlist.h"
 #define M_SQRT_3_4 0.86602540378443864676372317
 #define M_SQRT_3 1.73205080756887729352744634
@@ -57,3 +58,4 @@ bool isSmooth5(int n);
 
 DotList kindPattern(int n,int kind);
 bool isKind(int n,int kind);
+std::string kindName(int n);
