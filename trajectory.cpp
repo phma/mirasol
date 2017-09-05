@@ -311,7 +311,7 @@ void MultiTrajectory::bendAvoid()
         diff=traj[i]-traj[j];
         closeTime=diff.closest();
         closeSpace=diff.position(closeTime);
-        if (closeSpace.length()<0.99/sqrt(sqrt(iter+1)) && closeTime>0 && closeTime<1)
+        if (closeSpace.length()<0.5/sqrt(sqrt(iter+1)) && closeTime>0 && closeTime<1)
         {
           anyadj=true;
           if (closeSpace.length()==0)
@@ -323,8 +323,8 @@ void MultiTrajectory::bendAvoid()
           }
           closeSpace/=closeSpace.length();
           closeSpace*=closeTime*(1-closeTime)*4*sqrt(iter+1);
-          adjustments[i]+=closeSpace;
-          adjustments[j]-=closeSpace;
+          adjustments[i]+=closeSpace/2;
+          adjustments[j]-=closeSpace/2;
         }
       }
     }
