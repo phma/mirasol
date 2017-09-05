@@ -36,6 +36,7 @@ public:
   std::vector<MirasolAction *> actions;
   QAction *upAction,*downAction;
   QTimer *timer;
+  QMenu *fileMenu,*baseMenu,*kindMenu,*numberMenu;
   MirasolWidget(QWidget *parent=0);
   ~MirasolWidget();
   void makeActions();

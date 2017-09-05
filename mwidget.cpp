@@ -197,6 +197,10 @@ void MirasolWidget::makeActions()
   vector<int> kindlist;
   if (actions.size()==0)
   {
+    fileMenu=menuBar()->addMenu(tr("&File"));
+    baseMenu=menuBar()->addMenu(tr("&Base"));
+    kindMenu=menuBar()->addMenu(tr("&Kind of Number"));
+    numberMenu=menuBar()->addMenu(tr("&Number"));
     kindlist.push_back(0);
     kindlist.push_back(10);
     kindlist.push_back(16);
@@ -219,10 +223,14 @@ void MirasolWidget::makeActions()
     downAction=new QAction(this);
     pixmap->paintArrow(1);
     upAction->setIcon(QIcon(*pixmap));
+    upAction->setText(tr("&Up"));
     pixmap->paintArrow(-1);
     downAction->setIcon(QIcon(*pixmap));
+    downAction->setText(tr("&Down"));
     toolbar->addAction(upAction);
     toolbar->addAction(downAction);
+    numberMenu->addAction(upAction);
+    numberMenu->addAction(downAction);
     connect(upAction,SIGNAL(triggered(bool)),this,SLOT(increaseNumber(bool)));
     connect(downAction,SIGNAL(triggered(bool)),this,SLOT(decreaseNumber(bool)));
   }
@@ -233,6 +241,8 @@ void MirasolWidget::unmakeActions()
   int i;
   toolbar->removeAction(downAction);
   toolbar->removeAction(upAction);
+  numberMenu->removeAction(downAction);
+  numberMenu->removeAction(upAction);
   delete downAction;
   delete upAction;
   for (i=0;i<actions.size();i++)
@@ -240,5 +250,6 @@ void MirasolWidget::unmakeActions()
     toolbar->removeAction(actions[i]);
     delete actions[i];
   }
+  menuBar()->clear();
   actions.resize(0);
 }
