@@ -1,0 +1,32 @@
+Mirasol is a program for teaching numbers, inspired by Glenn Doman's flash cards. Unlike the flash cards, which just show each number in one random arrangement, Mirasol shows numbers in several shapes:
+•Asteraceous (Random arrangement is possible, but currently disabled.)
+•Decimal
+•Hexadecimal
+•Composite (e.g. 30 may be shown as six groups of five)
+•Prime (which is just asteraceous, but only for primes)
+•Fibonacci (Kepler triangle)
+•Square
+•Pronic (n*(n+1))
+•Triangle
+•Centered hexagon
+•5-smooth (e.g. 900 is shown as 4 groups of 9 groups of 25).
+So if you have 144 dots, you can show them as square or as Fibonacci; if you have 36 dots, you can show them as square or as triangle. If you like Doman's or Shichida's method, try this program.
+
+To compile, if you're not developing the program:
+1. Create a subdirectory build/ inside the directory where you untarred the source code.
+2. cd build
+3. cmake ..
+4. make
+
+If you are developing the program:
+1. Create a directory build/mirasol outside the directory where you cloned the source code.
+2. cd build/mirasol
+3. cmake <directory where the source code is>
+4. make
+
+System requirements:
+•Any sort of Unix-like system, such as Linux or BSD (Cygwin on Windows should work, but I haven't tried it)
+•An X server, preferably local
+•Qt5
+•A fast enough processor for animation
+•CMake 3.1 or later, a C++ compiler, and Qt5 development headers, for compiling.
