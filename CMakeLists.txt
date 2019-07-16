@@ -22,8 +22,7 @@ include(CheckTypeSize)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 
-find_package(Qt5Core)
-find_package(Qt5Widgets)
+find_package(Qt5 COMPONENTS Core Widgets REQUIRED)
 
 add_executable(mirasol mirasol.cpp mwidget.cpp dotcanvas.cpp xy.cpp angle.cpp trajectory.cpp dotlist.cpp pattern.cpp random.cpp maction.cpp nearindex.cpp)
 add_executable(miratest miratest.cpp xy.cpp angle.cpp trajectory.cpp dotlist.cpp
