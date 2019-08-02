@@ -3,7 +3,7 @@
 /* mwidget.cpp - main window class                    */
 /*                                                    */
 /******************************************************/
-/* Copyright 2015,2017 Pierre Abbat.
+/* Copyright 2015,2017,2019 Pierre Abbat.
  * This file is part of Mirasol.
  * 
  * Mirasol is free software: you can redistribute it and/or modify
@@ -129,8 +129,8 @@ void MirasolWidget::animateDots()
    */
   //timeStr=now.toString(Qt::ISODate);
   //cout<<timeStr.toStdString()<<'\r';
-  cout<<dotsQueue.size()<<"  \r";
-  cout.flush();
+  //cout<<dotsQueue.size()<<"  \r";
+  //cout.flush();
   if (dotsQueue.size())
   {
     do
