@@ -1,6 +1,6 @@
 project(mirasol)
 cmake_minimum_required(VERSION 3.1.0)
-# Copyright 2015,2016,2017 Pierre Abbat.
+# Copyright 2015,2016,2017,2019 Pierre Abbat.
 # This file is part of Mirasol.
 # 
 # Mirasol is free software: you can redistribute it and/or modify
@@ -32,6 +32,9 @@ add_executable(miratest miratest.cpp xy.cpp angle.cpp trajectory.cpp dotlist.cpp
 pattern.cpp random.cpp nearindex.cpp)
 target_link_libraries(mirasol Qt5::Widgets Qt5::Core)
 target_link_libraries(miratest Qt5::Core)
+
+target_compile_definitions(mirasol PUBLIC _USE_MATH_DEFINES)
+target_compile_definitions(miratest PUBLIC _USE_MATH_DEFINES)
 
 install(TARGETS mirasol DESTINATION bin)
 
