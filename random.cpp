@@ -3,7 +3,7 @@
 /* random.cpp - random numbers                        */
 /*                                                    */
 /******************************************************/
-/* Copyright 2017 Pierre Abbat.
+/* Copyright 2017,2019 Pierre Abbat.
  * This file is part of Mirasol.
  * 
  * Mirasol is free software: you can redistribute it and/or modify
@@ -20,6 +20,7 @@
  * along with Mirasol. If not, see <http://www.gnu.org/licenses/>.
  */
 #define _CRT_RAND_S
+#include "config.h"
 #include <cstdlib>
 #include <cstdio>
 #include "random.h"

@@ -1,4 +1,4 @@
-/* Copyright 2015,2017 Pierre Abbat.
+/* Copyright 2015,2017,2019 Pierre Abbat.
  * This file is part of Mirasol.
  * 
  * Mirasol is free software: you can redistribute it and/or modify
@@ -17,6 +17,7 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 #cmakedefine BIGENDIAN
+#cmakedefine HAVE_WINDOWS_H
 #define VERSION "@MIRASOL_VERSION@"
 #endif
 

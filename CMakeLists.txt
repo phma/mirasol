@@ -36,6 +36,9 @@ target_link_libraries(miratest Qt5::Core)
 target_compile_definitions(mirasol PUBLIC _USE_MATH_DEFINES)
 target_compile_definitions(miratest PUBLIC _USE_MATH_DEFINES)
 
+include(CheckIncludeFiles)
+check_include_files(windows.h HAVE_WINDOWS_H)
+
 install(TARGETS mirasol DESTINATION bin)
 
 test_big_endian(BIGENDIAN)
