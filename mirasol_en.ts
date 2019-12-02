@@ -33,6 +33,61 @@
         <source>&amp;Down</source>
         <translation>&amp;Down</translation>
     </message>
+    <message>
+        <location filename="pattern.cpp" line="406"/>
+        <source>Composite</source>
+        <translation>Composite</translation>
+    </message>
+    <message>
+        <location filename="pattern.cpp" line="409"/>
+        <source>Prime</source>
+        <translation>Prime</translation>
+    </message>
+    <message>
+        <location filename="pattern.cpp" line="412"/>
+        <source>Fibonacci</source>
+        <translation>Fibonacci</translation>
+    </message>
+    <message>
+        <location filename="pattern.cpp" line="415"/>
+        <source>Square</source>
+        <translation>Square</translation>
+    </message>
+    <message>
+        <location filename="pattern.cpp" line="418"/>
+        <source>Pronic</source>
+        <translation>Pronic</translation>
+    </message>
+    <message>
+        <location filename="pattern.cpp" line="421"/>
+        <source>Triangular</source>
+        <translation>Triangular</translation>
+    </message>
+    <message>
+        <location filename="pattern.cpp" line="424"/>
+        <source>Centered Hexagonal</source>
+        <translation>Centered Hexagonal</translation>
+    </message>
+    <message>
+        <location filename="pattern.cpp" line="427"/>
+        <source>5-Smooth</source>
+        <translation>5-Smooth</translation>
+    </message>
+    <message>
+        <location filename="pattern.cpp" line="430"/>
+        <source>No base</source>
+        <translation>No base</translation>
+    </message>
+    <message>
+        <location filename="pattern.cpp" line="433"/>
+        <source>Decimal</source>
+        <translation>Decimal</translation>
+    </message>
+    <message>
+        <location filename="pattern.cpp" line="436"/>
+        <source>Hexadecimal</source>
+        <translation>Hexadecimal</translation>
+    </message>
 </context>
 <context>
     <name>main</name>

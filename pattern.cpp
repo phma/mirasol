@@ -19,6 +19,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Mirasol. If not, see <http://www.gnu.org/licenses/>.
  */
+#include <QCoreApplication>
 #include <iostream>
 #include "pattern.h"
 #include <set>
@@ -403,37 +404,37 @@ string kindName(int n)
   switch (n)
   {
     case KIND_COMPOSITE:
-      return "Composite";
+      return QT_TRANSLATE_NOOP("MirasolWidget","Composite");
       break;
     case KIND_PRIME:
-      return "Prime";
+      return QT_TRANSLATE_NOOP("MirasolWidget","Prime");
       break;
     case KIND_FIBONACCI:
-      return "Fibonacci";
+      return QT_TRANSLATE_NOOP("MirasolWidget","Fibonacci");
       break;
     case KIND_SQUARE:
-      return "Square";
+      return QT_TRANSLATE_NOOP("MirasolWidget","Square");
       break;
     case KIND_PRONIC:
-      return "Pronic";
+      return QT_TRANSLATE_NOOP("MirasolWidget","Pronic");
       break;
     case KIND_TRIANGLE:
-      return "Triangular";
+      return QT_TRANSLATE_NOOP("MirasolWidget","Triangular");
       break;
     case KIND_HEXAGON:
-      return "Centered Hexagonal";
+      return QT_TRANSLATE_NOOP("MirasolWidget","Centered Hexagonal");
       break;
     case KIND_SMOOTH5:
-      return "5-Smooth";
+      return QT_TRANSLATE_NOOP("MirasolWidget","5-Smooth");
       break;
     case 0:
-      return "No base";
+      return QT_TRANSLATE_NOOP("MirasolWidget","No base");
       break;
     case 10:
-      return "Decimal";
+      return QT_TRANSLATE_NOOP("MirasolWidget","Decimal");
       break;
     case 16:
-      return "Hexadecimal";
+      return QT_TRANSLATE_NOOP("MirasolWidget","Hexadecimal");
       break;
     default:
       return "Base "+to_string(n);

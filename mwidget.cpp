@@ -212,7 +212,7 @@ void MirasolWidget::makeActions()
       pixmap->paintDots();
       actions.push_back(new MirasolAction(this,kindlist[i]));
       actions.back()->setIcon(QIcon(*pixmap));
-      actions.back()->setText(QString::fromStdString(kindName(kindlist[i])));
+      actions.back()->setText(tr(kindName(kindlist[i]).c_str()));
       connect(actions.back(),SIGNAL(triggered(bool)),this,SLOT(setKind(bool)));
       connect(actions.back(),SIGNAL(kindChanged(int)),this,SLOT(prepareSetKind(int)));
       connect(this,SIGNAL(kindChanged(int)),actions.back(),SLOT(setKind(int)));
