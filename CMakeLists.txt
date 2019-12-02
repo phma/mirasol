@@ -50,6 +50,11 @@ check_include_files(windows.h HAVE_WINDOWS_H)
 
 install(TARGETS mirasol DESTINATION bin)
 
+if (WIN32)
+include(windeployqt)
+windeployqt(perfecttin-gui bin)
+endif (WIN32)
+
 test_big_endian(BIGENDIAN)
 
 set(MIRASOL_MAJOR_VERSION 0)
