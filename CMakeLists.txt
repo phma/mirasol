@@ -24,6 +24,7 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS ON)
+set(SHARE_DIR ${CMAKE_INSTALL_PREFIX}/share/perfecttin)
 
 option (FORCE_COLORED_OUTPUT "Always produce ANSI-colored output (GNU/Clang only)." FALSE)
 if (${FORCE_COLORED_OUTPUT})
@@ -34,9 +35,13 @@ if (${FORCE_COLORED_OUTPUT})
   endif ()
 endif ()
 
-find_package(Qt5 COMPONENTS Core Widgets REQUIRED)
+find_package(Qt5 COMPONENTS Core Widgets Gui LinguistTools REQUIRED)
 
-add_executable(mirasol mirasol.cpp mwidget.cpp dotcanvas.cpp xy.cpp angle.cpp trajectory.cpp dotlist.cpp pattern.cpp random.cpp maction.cpp nearindex.cpp)
+qt5_add_translation(qm_files mirasol_en.ts mirasol_es.ts)
+# To update translations, run "lupdate *.cpp -ts *.ts" in the source directory.
+
+add_executable(mirasol mirasol.cpp mwidget.cpp dotcanvas.cpp xy.cpp angle.cpp trajectory.cpp
+	       dotlist.cpp pattern.cpp random.cpp maction.cpp nearindex.cpp ${qm_files})
 add_executable(miratest miratest.cpp xy.cpp angle.cpp trajectory.cpp dotlist.cpp
 pattern.cpp random.cpp nearindex.cpp)
 target_link_libraries(mirasol Qt5::Widgets Qt5::Core)
@@ -52,7 +57,7 @@ install(TARGETS mirasol DESTINATION bin)
 
 if (WIN32)
 include(windeployqt)
-windeployqt(perfecttin-gui bin)
+windeployqt(mirasol bin)
 endif (WIN32)
 
 test_big_endian(BIGENDIAN)
@@ -61,6 +66,7 @@ set(MIRASOL_MAJOR_VERSION 0)
 set(MIRASOL_MINOR_VERSION 1)
 set(MIRASOL_PATCH_VERSION 0)
 set(MIRASOL_VERSION ${MIRASOL_MAJOR_VERSION}.${MIRASOL_MINOR_VERSION}.${MIRASOL_PATCH_VERSION})
+set(COPY_YEAR 2019)
 
 include_directories(${PROJECT_BINARY_DIR})
 configure_file (config.h.in config.h)
