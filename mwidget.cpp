@@ -28,6 +28,7 @@ MirasolWidget::MirasolWidget(QWidget *parent):QMainWindow(parent)
 {
   int i,j;
   maxNumDots=1000;
+  numDots=-1;
   resize(707,500);
   setWindowTitle(QApplication::translate("main", "Mirasol"));
   show();
