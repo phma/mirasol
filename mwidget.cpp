@@ -227,8 +227,10 @@ void MirasolWidget::makeActions()
       else
         baseMenu->addAction(actions[i]);
     }
+    exitAction=new QAction(this);
     upAction=new QAction(this);
     downAction=new QAction(this);
+    exitAction->setText(tr("E&xit"));
     pixmap->paintArrow(1);
     upAction->setIcon(QIcon(*pixmap));
     upAction->setText(tr("&Up"));
@@ -237,10 +239,12 @@ void MirasolWidget::makeActions()
     downAction->setText(tr("&Down"));
     toolbar->addAction(upAction);
     toolbar->addAction(downAction);
+    fileMenu->addAction(exitAction);
     numberMenu->addAction(upAction);
     numberMenu->addAction(downAction);
     connect(upAction,SIGNAL(triggered(bool)),this,SLOT(increaseNumber(bool)));
     connect(downAction,SIGNAL(triggered(bool)),this,SLOT(decreaseNumber(bool)));
+    connect(exitAction,SIGNAL(triggered(bool)),this,SLOT(close()));
   }
 }
 

@@ -34,7 +34,7 @@ public:
   DotCanvas *dotcanvas;
   QToolBar *toolbar;
   std::vector<MirasolAction *> actions;
-  QAction *upAction,*downAction;
+  QAction *exitAction,*upAction,*downAction;
   QTimer *timer;
   QMenu *fileMenu,*baseMenu,*kindMenu,*numberMenu;
   MirasolWidget(QWidget *parent=0);
