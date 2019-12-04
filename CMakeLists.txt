@@ -35,6 +35,7 @@ if (${FORCE_COLORED_OUTPUT})
   endif ()
 endif ()
 
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 find_package(Qt5 COMPONENTS Core Widgets Gui LinguistTools REQUIRED)
 
 qt5_add_translation(qm_files mirasol_en.ts mirasol_es.ts)
@@ -49,6 +50,7 @@ target_link_libraries(miratest Qt5::Core)
 
 target_compile_definitions(mirasol PUBLIC _USE_MATH_DEFINES)
 target_compile_definitions(miratest PUBLIC _USE_MATH_DEFINES)
+set_target_properties(mirasol PROPERTIES WIN32_EXECUTABLE TRUE)
 
 include(CheckIncludeFiles)
 check_include_files(windows.h HAVE_WINDOWS_H)
