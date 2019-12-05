@@ -35,8 +35,9 @@ public:
   QToolBar *toolbar;
   std::vector<MirasolAction *> actions;
   QAction *exitAction,*upAction,*downAction;
+  QAction *aboutProgramAction,*aboutQtAction;
   QTimer *timer;
-  QMenu *fileMenu,*baseMenu,*kindMenu,*numberMenu;
+  QMenu *fileMenu,*baseMenu,*kindMenu,*numberMenu,*helpMenu;
   MirasolWidget(QWidget *parent=0);
   ~MirasolWidget();
   void makeActions();
@@ -53,6 +54,8 @@ public slots:
   void prepareSetKind(int kind);
   void setKind(bool checked);
   void animateDots();
+  void aboutProgram();
+  void aboutQt();
 private:
   int numDots;
   int maxNumDots;

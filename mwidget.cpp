@@ -20,6 +20,7 @@
  * along with Mirasol. If not, see <http://www.gnu.org/licenses/>.
  */
 #include <iostream>
+#include "config.h"
 #include "mwidget.h"
 #include "pattern.h"
 using namespace std;
@@ -178,6 +179,19 @@ void MirasolWidget::decreaseNumber(bool checked)
     setNumber(i);
 }
 
+void MirasolWidget::aboutProgram()
+{
+  QString progName=tr("Mirasol");
+  QMessageBox::about(this,tr("Mirasol"),
+		     tr("%1\nVersion %2\nCopyright %3 Pierre Abbat\nLicense GPL 3 or later")
+		     .arg(progName).arg(QString(VERSION)).arg(COPY_YEAR));
+}
+
+void MirasolWidget::aboutQt()
+{
+  QMessageBox::aboutQt(this,tr("PerfectTIN"));
+}
+
 /* The buttons are labeled with the following numbers in the appropriate pattern:
  * Asteraceous (which is considered base 0): 35.
  * All bases (which may range from 6 to 34): 35.
@@ -202,6 +216,7 @@ void MirasolWidget::makeActions()
     baseMenu=menuBar()->addMenu(tr("&Base"));
     kindMenu=menuBar()->addMenu(tr("&Kind of Number"));
     numberMenu=menuBar()->addMenu(tr("&Number"));
+    helpMenu=menuBar()->addMenu(tr("&Help"));
     kindlist.push_back(0);
     kindlist.push_back(10);
     kindlist.push_back(16);
@@ -230,6 +245,8 @@ void MirasolWidget::makeActions()
     exitAction=new QAction(this);
     upAction=new QAction(this);
     downAction=new QAction(this);
+    aboutProgramAction=new QAction(this);
+    aboutQtAction=new QAction(this);
     exitAction->setText(tr("E&xit"));
     pixmap->paintArrow(1);
     upAction->setIcon(QIcon(*pixmap));
@@ -237,13 +254,19 @@ void MirasolWidget::makeActions()
     pixmap->paintArrow(-1);
     downAction->setIcon(QIcon(*pixmap));
     downAction->setText(tr("&Down"));
+    aboutProgramAction->setText(tr("About &Mirasol"));
+    aboutQtAction->setText(tr("About &Qt"));
     toolbar->addAction(upAction);
     toolbar->addAction(downAction);
     fileMenu->addAction(exitAction);
     numberMenu->addAction(upAction);
     numberMenu->addAction(downAction);
+    helpMenu->addAction(aboutProgramAction);
+    helpMenu->addAction(aboutQtAction);
     connect(upAction,SIGNAL(triggered(bool)),this,SLOT(increaseNumber(bool)));
     connect(downAction,SIGNAL(triggered(bool)),this,SLOT(decreaseNumber(bool)));
+    connect(aboutProgramAction,SIGNAL(triggered(bool)),this,SLOT(aboutProgram()));
+    connect(aboutQtAction,SIGNAL(triggered(bool)),this,SLOT(aboutQt()));
     connect(exitAction,SIGNAL(triggered(bool)),this,SLOT(close()));
   }
 }
