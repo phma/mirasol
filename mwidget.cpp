@@ -189,7 +189,7 @@ void MirasolWidget::aboutProgram()
 
 void MirasolWidget::aboutQt()
 {
-  QMessageBox::aboutQt(this,tr("PerfectTIN"));
+  QMessageBox::aboutQt(this,tr("Mirasol"));
 }
 
 /* The buttons are labeled with the following numbers in the appropriate pattern:
