@@ -3,7 +3,7 @@
 /* xy.h - points in xy-plane                          */
 /*                                                    */
 /******************************************************/
-/* Copyright 2016,2017 Pierre Abbat.
+/* Copyright 2016,2017,2021 Pierre Abbat.
  * This file is part of Mirasol.
  * 
  * Mirasol is free software: you can redistribute it and/or modify
@@ -22,6 +22,7 @@
 
 #ifndef XY_H
 #define XY_H
+#include <cmath>
 class xy
 {
 public:
